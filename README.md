@@ -13,7 +13,7 @@ Source code for final group project
 ### App Description
 Introducing "**CookBook**", the ultimate recipe organizer app that puts the joy of cooking at your fingertips. With an extensive library of recipes and powerful search filters, you can easily find the perfect dish based on ingredients, cuisine, or meal type. Save your favorite recipes, create custom grocery lists, and seamlessly add your own recipes. Discover new culinary adventures, receive notifications for fresh additions, and explore related recipes tailored to your preferences. Stay organized, rate and review recipes, access nutritional information, and even generate personalized meal plans for a delightful cooking experience. Take control of your kitchen with CookBook today!.
 
-Features of CookBook
+### Features of CookBook
 > 1. Allowing the user to search for recipes based on ingredients, cuisine, or meal type
 > 2. Allowing the user to save their favorite recipes to their recipe box
 > 3. Allowing the user to add new recipes to the app by entering the recipe name, ingredients, and instructions
