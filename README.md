@@ -19,11 +19,11 @@ Introducing "**CookBook**", the ultimate recipe organizer app that puts the joy 
 > 3. Allowing the user to add new recipes to the app by entering the recipe name, ingredients, and instructions
 > 4. Allowing the user to edit or delete their own recipes
 > 5. Allowing the user to create a grocery list from the ingredients in their saved recipes
-> 6. Discover new recipes based on user preferences and history
+> 6. Set and manage timers for each recipe step within the app
 > 7. Displaying a notification when a new recipe is added to the app's library
-> 8. Allowing the user to rate and review recipes
-> 9. Displaying nutritional information for each recipe
-> 10. Allowing the user to view related recipes based on their browsing history
+> 8. Adjust ingredient quantities based on the desired serving sizes.
+> 9. Share recipes with others via email , messaging apps or social media
+> 10. Identify and highlight ingredients that are already in my pantry or shopping list
 > 11. Allowing the user to categorize their saved recipes by cuisine
 > 12. Allowing the user to sort their saved recipes alphabetically
 > 13. Allowing the user to set reminders to cook certain recipes on specific days
