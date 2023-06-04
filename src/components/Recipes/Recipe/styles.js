@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         },
 
         modalView: {
-            flexDirection: 'colomn',
+            flexDirection: 'column',
             backgroundColor: '#fff',
             margin: 10,
             padding: 10,
