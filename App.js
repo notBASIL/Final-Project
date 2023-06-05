@@ -9,6 +9,7 @@ import Recipes from './src/components/Recipes/Recipes';
 import styles from './src/styles/main';
 import About from './src/components/About/about';
 import getPosts from './src/database/read';
+import Filter from './src/components/Filter/Filter';
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -62,6 +63,14 @@ export default function App() {
           ),
         }}>
           {() => <Form onAddRecipe={addRecipe} refresh={refresh}/>}
+        </Tab.Screen>
+
+        <Tab.Screen name="Filter" options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="filter" color={color} size={size} />
+          ),
+        }}>
+           {() => <Filter recipes={recipes} refresh={refresh}/>}
         </Tab.Screen>
 
         <Tab.Screen name="About" options={{
