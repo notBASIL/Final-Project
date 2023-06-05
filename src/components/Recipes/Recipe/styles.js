@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     },
 
     ingredientContainer: {
-        backgroundColor: 'lightblue',
+        backgroundColor: '#ffc3b8',
         borderRadius: 20,
         paddingHorizontal: 10,
         paddingVertical: 5,

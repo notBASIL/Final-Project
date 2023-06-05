@@ -3,7 +3,6 @@ import { MaterialCommunityIcons } from "react-native-vector-icons";
 import styles from "./styles";
 import { useState } from "react";
 
-
 export default function Recipe(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [ingredientBgColor1, setIngredientBgColor1] = useState('lightblue');
