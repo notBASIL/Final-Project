@@ -8,11 +8,13 @@ import {
   Keyboard,
   SafeAreaView,
   Pressable,
-  Alert
+  Alert,
+  ScrollView
 } from "react-native";
 import styles from "./styles";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import postData from "../../database/write";
+import { Picker } from '@react-native-picker/picker';
 
 export default function Form(props) {
   const [recipeName, setRecipeName] = useState("");
@@ -63,7 +65,7 @@ export default function Form(props) {
     } else {
       setErrorMessage("Please enter a recipe name");
     }
-    
+
   };
   const handleNameChange = (value) => {
     setRecipeName(value);
@@ -73,7 +75,7 @@ export default function Form(props) {
   };
   return (
     <SafeAreaView>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         {errorMessage && (
           <View>
             <Text style={styles.text}>Attention!</Text>
@@ -117,14 +119,16 @@ export default function Form(props) {
           style={styles.textInput}
         />
 
-        <TextInput
-          placeholder="Enter Category *"
-          maxLength={150}
-          value={category}
-          onChangeText={(value) => setCategory(value)}
-          defaultValue={category}
-          style={styles.textInput}
-        />
+        <Picker
+          selectedValue={category}
+          onValueChange={(value) => setCategory(value)}
+          style={styles.picker}
+        >
+          <Picker.Item label="Breakfast" value="breakfast" />
+          <Picker.Item label="Lunch" value="Lunch" />
+          <Picker.Item label="Dinner" value="Dinner" />
+          <Picker.Item label="Snacks" value="Snacks" />
+        </Picker>
 
         <TextInput
           placeholder="Instructions *"
@@ -139,7 +143,7 @@ export default function Form(props) {
           <Switch value={favourite} onValueChange={handleFavouriteChange} />
         </View> */}
         <Button title="Add Recipe" onPress={handleAddPress} />
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
