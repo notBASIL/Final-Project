@@ -8,6 +8,7 @@ import {
   Keyboard,
   SafeAreaView,
   Pressable,
+  Alert
 } from "react-native";
 import styles from "./styles";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
@@ -48,9 +49,21 @@ export default function Form(props) {
         props.refresh
       );
       Keyboard.dismiss();
+      Alert.alert(
+        "Recipe Added",
+        "Your recipe has been added successfully",
+        [
+          {
+            text: "OK",
+            onPress: () => console.log("OK Pressed"),
+          },
+        ],
+        { cancelable: false }
+      );
     } else {
       setErrorMessage("Please enter a recipe name");
     }
+    
   };
   const handleNameChange = (value) => {
     setRecipeName(value);
@@ -115,16 +128,16 @@ export default function Form(props) {
 
         <TextInput
           placeholder="Instructions *"
-          maxLength={150}
+          maxLength={300}
           value={instructions}
           onChangeText={(value) => setInstructions(value)}
           defaultValue={instructions}
           style={styles.textInput}
         />
-        <View>
+        {/* <View>
           <Text style={styles.text2}>Favourite:</Text>
           <Switch value={favourite} onValueChange={handleFavouriteChange} />
-        </View>
+        </View> */}
         <Button title="Add Recipe" onPress={handleAddPress} />
       </View>
     </SafeAreaView>
