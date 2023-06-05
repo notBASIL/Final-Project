@@ -2,6 +2,7 @@ import { View, Text, Pressable, Modal, Switch, Alert } from "react-native";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import styles from "./styles";
 import { useState } from "react";
+import deleteRecipe from "../../../database/delete";
 
 
 export default function Recipe(props) {
@@ -12,6 +13,30 @@ export default function Recipe(props) {
   const handleModalVisible = () => {
     setModalVisible(!modalVisible);
   };
+
+ const handleDelete = () => {
+    Alert.alert(
+      "Delete Recipe",
+      "Are you sure you want to delete this recipe?",
+      [
+        {
+          text: "Confirm",
+          onPress: () => {
+            handleModalVisible(),
+            deleteRecipe(props.recipe.id, props.refresh);
+          },
+        },
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+      ],
+        { cancelable: false}
+    );
+      };
+        
+
   return (
     <>
       <Pressable onPress={handleModalVisible}>
@@ -81,7 +106,7 @@ export default function Recipe(props) {
               <MaterialCommunityIcons name="close" size={24} color="red" />
               <Text style={styles.close}>Close</Text>
             </Pressable>
-            <Pressable>
+            <Pressable onPress={handleDelete}>
               <MaterialCommunityIcons name="delete" size={24} color="red" />
               <Text style={styles.delete}>Delete</Text>
             </Pressable>
