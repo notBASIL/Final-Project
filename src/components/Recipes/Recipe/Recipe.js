@@ -41,7 +41,7 @@ export default function Recipe(props) {
               fontSize: 20,
             }}
           >
-            {props.recipe.name}
+            Recipe: {props.recipe.name}
           </Text>
           <View style={styles.ingredientContainer}>
             <Text style={styles.ingredientText}>
@@ -73,7 +73,8 @@ export default function Recipe(props) {
               fontSize: 15,
               fontWeight: "bold",
               width: "100%",
-              marginTop: 10
+              marginTop: 20,
+              marginBottom: 10
             }}
           >
             Category: {props.recipe?.category}

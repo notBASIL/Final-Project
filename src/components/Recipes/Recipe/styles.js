@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 7,
         borderWidth: 1,
-        borderColor: '#bcbcbc',
+        borderColor: '#ffc3b8',
         marginTop: 100,
 
     },
@@ -71,16 +71,18 @@ const styles = StyleSheet.create({
 
     ingredientContainer: {
         backgroundColor: '#ffc3b8',
-        borderRadius: 20,
+        borderRadius: 10,
         paddingHorizontal: 10,
         paddingVertical: 5,
         marginTop: 10,
         alignSelf: 'flex-start',
+
     },
     ingredientText: {
         color: 'black',
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 15,
+        padding: 5,
     }
 });
 export default styles;
