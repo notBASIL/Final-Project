@@ -5,13 +5,12 @@ import { getFirestore, getDocs,
 // Your web app's Firebase configuration
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC1VkcdQo1lH2dOpmGHdvIKAFqcYTSAz2w",
-  authDomain: "recipe-app-92282.firebaseapp.com",
-  projectId: "recipe-app-92282",
-  storageBucket: "recipe-app-92282.appspot.com",
-  messagingSenderId: "469956561613",
-  appId: "1:469956561613:web:dceae13691b0b435e43784",
-  measurementId: "G-H12P5T5595"
+  apiKey: "AIzaSyAzWvwaWRZXhzNtf-fl58g_TLGllBI2IDk",
+  authDomain: "test-project-631ed.firebaseapp.com",
+  projectId: "test-project-631ed",
+  storageBucket: "test-project-631ed.appspot.com",
+  messagingSenderId: "1036256892848",
+  appId: "1:1036256892848:web:88f8007a434d0968236875"
 };
   
 

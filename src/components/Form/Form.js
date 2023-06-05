@@ -15,7 +15,9 @@ import postData from "../../database/write";
 
 export default function Form(props) {
   const [recipeName, setRecipeName] = useState("");
-  const [ingredients, setIngredients] = useState("");
+  const [ingredient1, setIngredient1] = useState("");
+  const [ingredient2, setIngredient2] = useState("");
+  const [ingredient3, setIngredient3] = useState("");
   const [instructions, setInstructions] = useState("");
   const [category, setCategory] = useState("");
   const [favourite, setFavourite] = useState(false);
@@ -23,18 +25,22 @@ export default function Form(props) {
 
   const handleAddPress = () => {
     if (recipeName
-        && ingredients && instructions && category
-        ) {
+      && ingredient1 && instructions && category
+    ) {
       setErrorMessage(null);
       setRecipeName("");
-      setIngredients("");
+      setIngredient1("");
+      setIngredient2("");
+      setIngredient3("");
       setFavourite(false);
-        setInstructions("");
-        setCategory("");
+      setInstructions("");
+      setCategory("");
       postData(
         {
           name: recipeName,
-          ingredients: ingredients,
+          ingredient1: ingredient1,
+          ingredient2: ingredient2,
+          ingredient3: ingredient3,
           favourite: favourite,
           instructions: instructions,
           category: category,
@@ -48,9 +54,6 @@ export default function Form(props) {
   };
   const handleNameChange = (value) => {
     setRecipeName(value);
-  };
-  const handleIngredientsChange = (value) => {
-    setIngredients(value);
   };
   const handleFavouriteChange = (value) => {
     setFavourite(value);
@@ -66,7 +69,7 @@ export default function Form(props) {
         )}
 
         <TextInput
-          placeholder="Enter recipe name"
+          placeholder="Enter recipe name *"
           maxLength={150}
           value={recipeName}
           onChangeText={handleNameChange}
@@ -75,16 +78,34 @@ export default function Form(props) {
         />
 
         <TextInput
-          placeholder="Ingredients"
+          placeholder="Ingredient 1 *"
           maxLength={300}
-          value={ingredients}
-          onChangeText={handleIngredientsChange}
-          defaultValue={ingredients}
+          value={ingredient1}
+          onChangeText={(value) => setIngredient1(value)}
+          defaultValue={ingredient1}
           style={styles.textInput}
         />
 
         <TextInput
-          placeholder="Enter Category"
+          placeholder="Ingredient 2"
+          maxLength={300}
+          value={ingredient2}
+          onChangeText={(value) => setIngredient2(value)}
+          defaultValue={ingredient2}
+          style={styles.textInput}
+        />
+
+        <TextInput
+          placeholder="Ingredient 3"
+          maxLength={300}
+          value={ingredient3}
+          onChangeText={(value) => setIngredient3(value)}
+          defaultValue={ingredient3}
+          style={styles.textInput}
+        />
+
+        <TextInput
+          placeholder="Enter Category *"
           maxLength={150}
           value={category}
           onChangeText={(value) => setCategory(value)}
@@ -93,7 +114,7 @@ export default function Form(props) {
         />
 
         <TextInput
-          placeholder="Instructions"
+          placeholder="Instructions *"
           maxLength={150}
           value={instructions}
           onChangeText={(value) => setInstructions(value)}
