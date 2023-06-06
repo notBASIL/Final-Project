@@ -115,7 +115,18 @@ export default function Recipe(props) {
           >
             <Text>Instructions: {props.recipe.instructions}</Text>
           </View>
-
+          <Text
+          style={{
+            padding: 5,
+            borderRadius: 5,
+            fontSize: 15,
+            fontWeight: "bold",
+            width: "100%",
+            marginTop: 5,
+            marginLeft: 242,
+            color: "green",
+          }}
+          >Favourite:</Text>
           <Switch style={styles.toggleSwitch}
               value={favorite}
               onValueChange={handleStatusToggle}

@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     },
     toggleSwitch: {
         alignSelf: 'flex-end',
+        marginRight: 30,
     }
 });
 export default styles;
