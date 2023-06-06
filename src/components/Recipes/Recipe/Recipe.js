@@ -32,36 +32,7 @@ export default function Recipe(props) {
       prevColor === "yellow" ? "lightblue" : "yellow"
     );
   };
-
-  const handleStatusToggle = () => {
-    const newFavorite = !favorite;
-    setFavorite(newFavorite);
-    props.onStatusChange(props.recipe.id, newFavorite);
-  };
-
-  const handleDelete = () => {
-    //show alert to confirm delete
-    Alert.alert(
-      "Delete Recipe",
-      "Are you sure you want to remove this Recipe ?",
-      [
-        {
-          text: "Confirm",
-          onPress: () => {
-            handleModalVisible(),
-              deleteRecipe(props.recipe.id, props.refresh);
-          },
-        },
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-      ],
-      { cancelable: false }
-    );
-  };
-
+  
   const handleStatusToggle = () => {
     const newFavorite = !favorite;
     setFavorite(newFavorite);

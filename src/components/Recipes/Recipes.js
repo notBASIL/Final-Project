@@ -49,15 +49,7 @@ export default function Recipes(props) {
             }}>You don't have any Recipes</Text>
         }
       </ScrollView>
-      <View style={styles.favoriteButtonContainer}>
-        <Button
-          title="Favorite Recipes" // Move the title prop inside the Button component
-          onPress={() => {
-            // Navigate to a screen or show a modal to display favorite recipes
-            // You can pass the `favoriteRecipes` array to the screen/modal
-          }}
-        />
-      </View>
+      
     </View>
   );
 }

@@ -10,6 +10,7 @@ import styles from './src/styles/main';
 import About from './src/components/About/about';
 import getPosts from './src/database/read';
 import Filter from './src/components/Filter/Filter';
+import Favourites from './src/components/Favourites/Favourites';
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -38,6 +39,23 @@ export default function App() {
     setRecipes([...recipes, recipe]);
 
   }
+
+  const handleStatusChange = (recipeId, newStatus) => {
+    setRecipes((prevRecipes) =>
+      prevRecipes.map((recipe) =>
+        recipe.id === recipeId ? { ...recipe, done: newStatus } : recipe
+      )
+    );
+  };
+
+  const handleDelete = (recipeId) => {
+    setRecipes((prevRecipes) =>
+      prevRecipes.filter((recipe) => recipe.id !== recipeId)
+    );
+  };
+
+  const favoriteRecipes = recipes.filter((recipe) => recipe.done);
+
   return (
     <NavigationContainer>
       <StatusBar style="auto" />
@@ -49,6 +67,7 @@ export default function App() {
         initialRouteName="Recipes" 
         tabBarActiveTintColor="#e91e63"
       >
+
         <Tab.Screen name="Recipes" options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="format-list-bulleted" color={color} size={size} />
@@ -71,6 +90,14 @@ export default function App() {
           ),
         }}>
            {() => <Filter recipes={recipes} refresh={refresh}/>}
+        </Tab.Screen>
+
+        <Tab.Screen name="Favourites" options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="heart" color={color} size={size} />
+         ),  
+        }}>
+          {() => ( <Favourites favouriteRecipes={favoriteRecipes} onStatusChange={handleStatusChange} onDelete={handleDelete} refresh={refresh} /> )}
         </Tab.Screen>
 
         <Tab.Screen name="About" options={{
