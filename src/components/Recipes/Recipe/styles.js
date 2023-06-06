@@ -83,6 +83,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 15,
         padding: 5,
+    },
+    toggleSwitch: {
+        alignSelf: 'flex-end',
     }
 });
 export default styles;

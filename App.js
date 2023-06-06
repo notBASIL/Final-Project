@@ -54,7 +54,7 @@ export default function App() {
     );
   };
 
-  const favoriteRecipes = recipes.filter((recipe) => recipe.done);
+  const favoriteRecipes = recipes.filter((recipe) => recipe.favorite);
 
   return (
     <NavigationContainer>
@@ -97,7 +97,9 @@ export default function App() {
             <MaterialCommunityIcons name="heart" color={color} size={size} />
          ),  
         }}>
-          {() => ( <Favourites favouriteRecipes={favoriteRecipes} onStatusChange={handleStatusChange} onDelete={handleDelete} refresh={refresh} /> )}
+          {() => ( <Favourites recipes={recipes} onStatusChange={handleStatusChange} onDelete={handleDelete} refresh={refresh}
+    />
+  )}
         </Tab.Screen>
 
         <Tab.Screen name="About" options={{

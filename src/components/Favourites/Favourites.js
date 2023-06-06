@@ -4,43 +4,49 @@ import Recipe from "../Recipes/Recipe/Recipe";
 import styles from "./styles";
 
 export default function Favourites(props) {
-    const [recipes, setRecipes] = useState([]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+
+  useEffect(() => {
+    // Filter recipes based on the favorite status
+    const filteredRecipes = props.recipes.filter((recipe) => recipe.favorite);
+    setFavoriteRecipes(filteredRecipes);
+  }, [props.recipes]);
+
+  // const handleStatusChange = (recipeId, newStatus) => {
+  //   setFavoriteRecipes((prevRecipes) =>
+  //     prevRecipes.map((recipe) =>
+  //       recipe.id === recipeId ? { ...recipe, favorite: newStatus } : recipe
+  //     )
+  //   );
+  //   props.onStatusChange(recipeId, newStatus);
+  // };
   
-    useEffect(() => {
-      setRecipes(props.favouriteRecipes);
-    }, [props.favouriteRecipes]);
+  // const handleDelete = (recipeId) => {
+  //   setFavoriteRecipes((prevRecipes) =>
+  //     prevRecipes.filter((recipe) => recipe.id !== recipeId)
+  //   );
+  //   props.onDelete(recipeId);
+  // };
   
-    const handleStatusChange = (recipeId) => {
-      setRecipes((prevRecipes) =>
-        prevRecipes.map((recipe) =>
-          recipe.id === recipeId ? { ...recipe, done: !recipe.done } : recipe
-        )
-      );
-    };
   
-    const handleDelete = (recipeId) => {
-      setRecipes((prevRecipes) =>
-        prevRecipes.filter((recipe) => recipe.id !== recipeId)
-      );
-    };
-  
-    return (
-      <View style={styles.container}>
-        <ScrollView>
-          {recipes.length > 0 ? (
-            recipes.map((recipe) => (
-              <Recipe
-                key={recipe.id}
-                recipe={recipe}
-                onStatusChange={handleStatusChange}
-                onDelete={handleDelete}
-                refresh={props.refresh}
-              />
-            ))
-          ) : (
-            <Text style={styles.noRecipesText}>No favourite recipes yet</Text>
-          )}
-        </ScrollView>
-      </View>
-    );
-  }
+
+  return (
+    <View style={styles.container}>
+      <ScrollView>
+        {favoriteRecipes.length > 0 ? (
+          favoriteRecipes.map((recipe) => (
+            <Recipe
+            key={recipe.id}
+            recipe={recipe}
+            onStatusChange={props.onStatusChange}
+            onDelete={props.onDelete} 
+            refresh={props.refresh}
+            />
+          ))
+        ) : (
+          <Text style={styles.noRecipesText}>No favorite recipes yet</Text>
+        )}
+      </ScrollView>
+    </View>
+  );
+}

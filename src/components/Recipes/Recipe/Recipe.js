@@ -9,7 +9,7 @@ export default function Recipe(props) {
   const [ingredientBgColor1, setIngredientBgColor1] = useState("lightblue");
   const [ingredientBgColor2, setIngredientBgColor2] = useState("lightblue");
   const [ingredientBgColor3, setIngredientBgColor3] = useState("lightblue");
-  const [favorite, setFavorite] = useState(props.recipe.done);
+  const [favorite, setFavorite] = useState(props.recipe.favorite);
 
   const handleModalVisible = () => {
     setModalVisible(!modalVisible);
@@ -38,6 +38,7 @@ export default function Recipe(props) {
     setFavorite(newFavorite);
     props.onStatusChange(props.recipe.id, newFavorite);
   };
+  
 
   const handleDelete = () => {
     Alert.alert("Delete Recipe", "Are you sure you want to delete this recipe?", [
@@ -113,7 +114,7 @@ export default function Recipe(props) {
           >
             <Text>Instructions: {props.recipe.instructions}</Text>
 
-            <Switch
+            <Switch style={styles.toggleSwitch}
               value={favorite}
               onValueChange={handleStatusToggle}
               thumbColor={favorite ? "red" : "gray"}
