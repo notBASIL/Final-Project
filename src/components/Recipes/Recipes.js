@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, Button } from "react-native";
 import Recipe from "./Recipe/Recipe";
 import styles from "./styles";
 
@@ -9,6 +9,22 @@ export default function Recipes(props) {
     useEffect(() => {
         setRecipes(props.recipes);
     }, [props.recipes]);
+
+    const handleStatusChange = (recipeId) => {
+      setRecipes((prevRecipes) =>
+        prevRecipes.map((recipe) =>
+          recipe.id === recipeId ? { ...recipe, done: !recipe.done } : recipe
+        )
+      );
+    };
+  
+    const handleDelete = (recipeId) => {
+      setRecipes((prevRecipes) =>
+        prevRecipes.filter((recipe) => recipe.id !== recipeId)
+      );
+    };
+  
+    const favoriteRecipes = recipes.filter((recipe) => recipe.done);
 
     
     
@@ -21,7 +37,7 @@ export default function Recipes(props) {
                 <Recipe
                     key={recipe.id}
                     recipe={recipe}
-                    onStatusChange={props.onStatusChange}
+                    onStatusChange={handleStatusChange}
                     onDelete={props.onDelete}
                     refresh={props.refresh}
                 />
@@ -33,6 +49,15 @@ export default function Recipes(props) {
             }}>You don't have any Recipes</Text>
         }
       </ScrollView>
+      <View style={styles.favoriteButtonContainer}>
+        <Button
+          title="Favorite Recipes" // Move the title prop inside the Button component
+          onPress={() => {
+            // Navigate to a screen or show a modal to display favorite recipes
+            // You can pass the `favoriteRecipes` array to the screen/modal
+          }}
+        />
+      </View>
     </View>
   );
 }

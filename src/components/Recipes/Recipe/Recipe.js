@@ -6,11 +6,10 @@ import deleteRecipe from "../../../database/delete";
 
 export default function Recipe(props) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [ingredientBgColor1, setIngredientBgColor1] = useState('lightblue');
-  const [ingredientBgColor2, setIngredientBgColor2] = useState('lightblue');
-  const [ingredientBgColor3, setIngredientBgColor3] = useState('lightblue');
-
-  console.log(props.recipe?.amount);
+  const [ingredientBgColor1, setIngredientBgColor1] = useState("lightblue");
+  const [ingredientBgColor2, setIngredientBgColor2] = useState("lightblue");
+  const [ingredientBgColor3, setIngredientBgColor3] = useState("lightblue");
+  const [favorite, setFavorite] = useState(props.recipe.done);
 
   const handleModalVisible = () => {
     setModalVisible(!modalVisible);
@@ -18,18 +17,26 @@ export default function Recipe(props) {
 
   const handleIngredientPress1 = () => {
     setIngredientBgColor1((prevColor) =>
-      prevColor === 'yellow' ? 'lightblue' : 'yellow'
+      prevColor === "yellow" ? "lightblue" : "yellow"
     );
   };
+
   const handleIngredientPress2 = () => {
     setIngredientBgColor2((prevColor) =>
-      prevColor === 'yellow' ? 'lightblue' : 'yellow'
+      prevColor === "yellow" ? "lightblue" : "yellow"
     );
   };
+
   const handleIngredientPress3 = () => {
     setIngredientBgColor3((prevColor) =>
-      prevColor === 'yellow' ? 'lightblue' : 'yellow'
+      prevColor === "yellow" ? "lightblue" : "yellow"
     );
+  };
+
+  const handleStatusToggle = () => {
+    const newFavorite = !favorite;
+    setFavorite(newFavorite);
+    props.onStatusChange(props.recipe.id, newFavorite);
   };
 
   const handleDelete = () => {
@@ -53,6 +60,28 @@ export default function Recipe(props) {
       ],
       { cancelable: false }
     );
+  };
+
+  const handleStatusToggle = () => {
+    const newFavorite = !favorite;
+    setFavorite(newFavorite);
+    props.onStatusChange(props.recipe.id, newFavorite);
+  };
+
+  const handleDelete = () => {
+    Alert.alert("Delete Recipe", "Are you sure you want to delete this recipe?", [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+      {
+        text: "Delete",
+        onPress: () => {
+          props.onDelete(props.recipe.id);
+        },
+        style: "destructive",
+      },
+    ]);
   };
 
   return (
@@ -98,7 +127,7 @@ export default function Recipe(props) {
               fontWeight: "bold",
               width: "100%",
               marginTop: 20,
-              marginBottom: 10
+              marginBottom: 10,
             }}
           >
             Category: {props.recipe?.category}
@@ -108,20 +137,17 @@ export default function Recipe(props) {
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
-              paddingTop: 10
-            }}>
-            <Text>
+              paddingTop: 10,
+            }}
+          >
+            <Text>Instructions: {props.recipe.instructions}</Text>
 
-              Instructions: {props.recipe.instructions}</Text>
-
-            <Text
-              style={{
-                ...styles.status,
-                color: props.recipe.done ? "green" : "red",
-              }}
-            >
-              {props.recipe.done ? "Favourite" : ""}
-            </Text>
+            <Switch
+              value={favorite}
+              onValueChange={handleStatusToggle}
+              thumbColor={favorite ? "red" : "gray"}
+              trackColor={{ false: "gray", true: "silver" }}
+            />
           </View>
         </View>
       </Pressable>
@@ -130,21 +156,42 @@ export default function Recipe(props) {
           <Text style={styles.headerTitle}>{props.recipe.name}</Text>
           <Text>{props.recipe.category}</Text>
           <Pressable onPress={handleIngredientPress1}>
-          <View style={[styles.ingredientContainer, { backgroundColor: ingredientBgColor1 }]}>
-                <Text style={styles.ingredientText}>1. {props.recipe.ingredient1}</Text>
+            <View
+              style={[
+                styles.ingredientContainer,
+                { backgroundColor: ingredientBgColor1 },
+              ]}
+            >
+              <Text style={styles.ingredientText}>
+                1. {props.recipe.ingredient1}
+              </Text>
             </View>
           </Pressable>
           {props.recipe.ingredient2 && (
             <Pressable onPress={handleIngredientPress2}>
-              <View style={[styles.ingredientContainer, { backgroundColor: ingredientBgColor2 }]}>
-                <Text style={styles.ingredientText}>2. {props.recipe.ingredient2}</Text>
+              <View
+                style={[
+                  styles.ingredientContainer,
+                  { backgroundColor: ingredientBgColor2 },
+                ]}
+              >
+                <Text style={styles.ingredientText}>
+                  2. {props.recipe.ingredient2}
+                </Text>
               </View>
             </Pressable>
           )}
           {props.recipe.ingredient3 && (
             <Pressable onPress={handleIngredientPress3}>
-              <View style={[styles.ingredientContainer, { backgroundColor: ingredientBgColor3 }]}>
-                <Text style={styles.ingredientText}>3. {props.recipe.ingredient3}</Text>
+              <View
+                style={[
+                  styles.ingredientContainer,
+                  { backgroundColor: ingredientBgColor3 },
+                ]}
+              >
+                <Text style={styles.ingredientText}>
+                  3. {props.recipe.ingredient3}
+                </Text>
               </View>
             </Pressable>
           )}
