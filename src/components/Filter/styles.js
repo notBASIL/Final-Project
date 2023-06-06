@@ -8,7 +8,10 @@ const styles = StyleSheet.create({
     dropdownLabel: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: 'red'
+        color: 'red',
+        // align the label to center
+        textAlign: 'center',
+        marginTop: 10,
     },
     dropdownContainer: {
         paddingHorizontal: 16,

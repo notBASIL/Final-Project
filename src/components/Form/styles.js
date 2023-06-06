@@ -10,8 +10,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
-    elevation: 1,
-
+    elevation: 1
     },
     text: {
     color: 'red',
@@ -32,6 +31,13 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 10,
         backgroundColor: 'white',
-    }
+    },
+    dropdownLabel: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'black',
+        textAlign: 'center',
+        marginTop: 10,
+    },
     });
     export default styles;
