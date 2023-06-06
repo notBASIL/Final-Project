@@ -49,7 +49,8 @@ export default function Recipe(props) {
       {
         text: "Delete",
         onPress: () => {
-          props.onDelete(props.recipe.id);
+          handleModalVisible(),
+              deleteRecipe(props.recipe.id, props.refresh);
         },
         style: "destructive",
       },
