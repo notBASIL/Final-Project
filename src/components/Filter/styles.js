@@ -9,10 +9,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: 'red'
-    },
-    dropdownContainer: {
-        paddingHorizontal: 16,
-        paddingVertical: 8,
     }
 });
 export default styles;
