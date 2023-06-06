@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView } from "react-native";
 import Recipe from "../Recipes/Recipe/Recipe";
 import styles from "./styles";
@@ -12,23 +12,21 @@ export default function Favourites(props) {
     setFavoriteRecipes(filteredRecipes);
   }, [props.recipes]);
 
-  // const handleStatusChange = (recipeId, newStatus) => {
-  //   setFavoriteRecipes((prevRecipes) =>
-  //     prevRecipes.map((recipe) =>
-  //       recipe.id === recipeId ? { ...recipe, favorite: newStatus } : recipe
-  //     )
-  //   );
-  //   props.onStatusChange(recipeId, newStatus);
-  // };
-  
-  // const handleDelete = (recipeId) => {
-  //   setFavoriteRecipes((prevRecipes) =>
-  //     prevRecipes.filter((recipe) => recipe.id !== recipeId)
-  //   );
-  //   props.onDelete(recipeId);
-  // };
-  
-  
+  const handleStatusChange = (recipeId, newStatus) => {
+    setFavoriteRecipes((prevRecipes) =>
+      prevRecipes.map((recipe) =>
+        recipe.id === recipeId ? { ...recipe, favorite: newStatus } : recipe
+      )
+    );
+    props.onStatusChange(recipeId, newStatus);
+  };
+
+  const handleDelete = (recipeId) => {
+    setFavoriteRecipes((prevRecipes) =>
+      prevRecipes.filter((recipe) => recipe.id !== recipeId)
+    );
+    props.onDelete(recipeId);
+  };
 
   return (
     <View style={styles.container}>
@@ -36,11 +34,11 @@ export default function Favourites(props) {
         {favoriteRecipes.length > 0 ? (
           favoriteRecipes.map((recipe) => (
             <Recipe
-            key={recipe.id}
-            recipe={recipe}
-            onStatusChange={props.onStatusChange}
-            onDelete={props.onDelete} 
-            refresh={props.refresh}
+              key={recipe.id}
+              recipe={recipe}
+              onStatusChange={handleStatusChange}
+              onDelete={handleDelete}
+              refresh={props.refresh}
             />
           ))
         ) : (

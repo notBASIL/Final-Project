@@ -114,14 +114,14 @@ export default function Recipe(props) {
             }}
           >
             <Text>Instructions: {props.recipe.instructions}</Text>
+          </View>
 
-            <Switch style={styles.toggleSwitch}
+          <Switch style={styles.toggleSwitch}
               value={favorite}
               onValueChange={handleStatusToggle}
               thumbColor={favorite ? "red" : "gray"}
               trackColor={{ false: "gray", true: "silver" }}
             />
-          </View>
         </View>
       </Pressable>
       <Modal visible={modalVisible}>
