@@ -32,6 +32,7 @@ export default function Favourites(props) {
     props.onDelete(recipeId);
   };
 
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -52,3 +53,5 @@ export default function Favourites(props) {
     </View>
   );
 }
+
+//not implemented
