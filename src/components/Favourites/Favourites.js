@@ -8,23 +8,27 @@ export default function Favourites(props) {
 
   useEffect(() => {
     // Filter recipes based on the favorite status
-    const filteredRecipes = props.recipes.filter((recipe) => recipe.favorite);
-    setFavoriteRecipes(filteredRecipes);
-  }, [props.recipes]);
+    if (props.favoriteRecipes) {
+      const filteredRecipes = props.favoriteRecipes.filter(
+        (recipe) => recipe.favorite === true
+      );
+      setFavoriteRecipes(filteredRecipes);
+    }
+  }, [props.favoriteRecipes]);
 
   const handleStatusChange = (recipeId, newStatus) => {
-    setFavoriteRecipes((prevRecipes) =>
-      prevRecipes.map((recipe) =>
-        recipe.id === recipeId ? { ...recipe, favorite: newStatus } : recipe
-      )
+    const updatedRecipes = favoriteRecipes.map((recipe) =>
+      recipe.id === recipeId ? { ...recipe, favorite: newStatus } : recipe
     );
+    setFavoriteRecipes(updatedRecipes);
     props.onStatusChange(recipeId, newStatus);
   };
 
   const handleDelete = (recipeId) => {
-    setFavoriteRecipes((prevRecipes) =>
-      prevRecipes.filter((recipe) => recipe.id !== recipeId)
+    const updatedRecipes = favoriteRecipes.filter(
+      (recipe) => recipe.id !== recipeId
     );
+    setFavoriteRecipes(updatedRecipes);
     props.onDelete(recipeId);
   };
 

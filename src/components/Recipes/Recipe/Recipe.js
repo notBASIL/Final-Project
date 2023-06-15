@@ -32,12 +32,18 @@ export default function Recipe(props) {
       prevColor === "yellow" ? "lightblue" : "yellow"
     );
   };
-  
+
   const handleStatusToggle = () => {
     const newFavorite = !favorite;
     setFavorite(newFavorite);
     props.onStatusChange(props.recipe.id, newFavorite);
   };
+  
+  // const handleStatusToggle = () => {
+  //   const newFavorite = !favorite;
+  //   setFavorite(newFavorite);
+  //   props.onStatusChange(props.recipe.id, newFavorite);
+  // };
   
 
   const handleDelete = () => {
@@ -115,7 +121,7 @@ export default function Recipe(props) {
           >
             <Text>Instructions: {props.recipe.instructions}</Text>
           </View>
-          <Text
+          {/* <Text
           style={{
             padding: 5,
             borderRadius: 5,
@@ -126,7 +132,7 @@ export default function Recipe(props) {
             marginLeft: 242,
             color: "green",
           }}
-          >Favourite:</Text>
+          >Favourite:</Text> */}
           <Switch style={styles.toggleSwitch}
               value={favorite}
               onValueChange={handleStatusToggle}
