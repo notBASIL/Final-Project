@@ -14,6 +14,7 @@ import {
 import styles from "./styles";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import postData from "../../database/write";
+import { CheckBox } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
 
 export default function Form(props) {
@@ -21,6 +22,8 @@ export default function Form(props) {
   const [ingredient1, setIngredient1] = useState("");
   const [ingredient2, setIngredient2] = useState("");
   const [ingredient3, setIngredient3] = useState("");
+  const [lactoseFree, setLactoseFree] = useState(false)
+  const [glutenFree, setGlutenFree] = useState(false)
   const [instructions, setInstructions] = useState("");
   const [category, setCategory] = useState("");
   const [favourite, setFavourite] = useState(false);
@@ -35,6 +38,8 @@ export default function Form(props) {
       setIngredient1("");
       setIngredient2("");
       setIngredient3("");
+      setLactoseFree(false)
+      setGlutenFree(false);
       setFavourite(false);
       setInstructions("");
       setCategory("");
@@ -44,6 +49,8 @@ export default function Form(props) {
           ingredient1: ingredient1,
           ingredient2: ingredient2,
           ingredient3: ingredient3,
+          lactoseFree: lactoseFree,
+          glutenFree: glutenFree,
           favourite: favourite,
           instructions: instructions,
           category: category,
@@ -118,6 +125,20 @@ export default function Form(props) {
           defaultValue={ingredient3}
           style={styles.textInput}
         />
+        <View style={styles.checkboxContainer}>
+          <CheckBox
+            title="Lactose free"
+            checked={lactoseFree}
+            onPress={() => setLactoseFree(!lactoseFree)}
+            containerStyle={styles.checkbox}
+          />
+          <CheckBox
+            title="Gluten free"
+            checked={glutenFree}
+            onPress={() => setGlutenFree(!glutenFree)}
+            containerStyle={styles.checkbox}
+          />
+        </View>
         <Text style={styles.dropdownLabel}>Select a Category</Text>
         <Picker
           selectedValue={category}
