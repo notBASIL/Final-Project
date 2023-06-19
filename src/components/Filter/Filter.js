@@ -6,7 +6,7 @@ import { Picker } from '@react-native-picker/picker';
 
 export default function Filter(props) {
   const [recipes, setRecipes] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(''); // State to store the selected category
+  const [selectedCategory, setSelectedCategory] = useState('breakfast'); // State to store the selected category
 
   useEffect(() => {
     // Filter recipes based on the selected category
