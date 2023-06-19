@@ -138,9 +138,9 @@ export default function Form(props) {
           defaultValue={instructions}
           style={styles.textInput}
         />
-        <View>
-          <Text style={styles.text2}>Favourite:</Text>
+        <View style={styles.switch}>
           <Switch value={favourite} onValueChange={handleFavouriteChange} />
+          <Text style={styles.switchText}>Favourite</Text>
         </View>
         <Button title="Add Recipe" onPress={handleAddPress} />
         <Text>{"\n"}

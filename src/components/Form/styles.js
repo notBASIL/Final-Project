@@ -19,8 +19,17 @@ const styles = StyleSheet.create({
     },
     text2:
     {
-    paddingTop: 5,
-    paddingBottom: 8,
+        flex: 1,
+        marginLeft: 10,
+    },
+    switch: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingTop: Platform.OS === 'ios' ? 20 : 0
+    },
+    switchText: {
+        marginLeft: Platform.OS === 'ios' ? 10 : 0,
+        color: '#444'
     },
     textInput: {
         marginTop: 10,

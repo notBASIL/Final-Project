@@ -32,18 +32,6 @@ export default function Recipe(props) {
       prevColor === "yellow" ? "lightblue" : "yellow"
     );
   };
-
-  const handleStatusToggle = () => {
-    const newFavorite = !favorite;
-    setFavorite(newFavorite);
-    props.onStatusChange(props.recipe.id, newFavorite);
-  };
-  
-  // const handleStatusToggle = () => {
-  //   const newFavorite = !favorite;
-  //   setFavorite(newFavorite);
-  //   props.onStatusChange(props.recipe.id, newFavorite);
-  // };
   
 
   const handleDelete = () => {
@@ -133,12 +121,6 @@ export default function Recipe(props) {
             color: "green",
           }}
           >Favourite:</Text> */}
-          <Switch style={styles.toggleSwitch}
-              value={favorite}
-              onValueChange={handleStatusToggle}
-              thumbColor={favorite ? "red" : "gray"}
-              trackColor={{ false: "gray", true: "silver" }}
-            />
         </View>
       </Pressable>
       <Modal visible={modalVisible}>
