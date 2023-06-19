@@ -25,13 +25,13 @@ export default function Form(props) {
   const [lactoseFree, setLactoseFree] = useState(false)
   const [glutenFree, setGlutenFree] = useState(false)
   const [instructions, setInstructions] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("breakfast");
   const [favourite, setFavourite] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
   const handleAddPress = () => {
     if (recipeName
-      && ingredient1 && instructions && category
+      && ingredient1 && instructions
     ) {
       setErrorMessage(null);
       setRecipeName("");
@@ -70,7 +70,7 @@ export default function Form(props) {
         { cancelable: false }
       );
     } else {
-      setErrorMessage("Please enter a recipe name");
+      setErrorMessage("One or more required fields are missing");
     }
 
   };
