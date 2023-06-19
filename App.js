@@ -88,7 +88,7 @@ export default function App() {
             <MaterialCommunityIcons name="filter" color={color} size={size} />
           ),
         }}>
-           {() => <Filter recipes={recipes} refresh={refresh}/>}
+           { () => <Filter recipes={recipes} refresh={refresh}/> }
         </Tab.Screen>
 
         <Tab.Screen name="Favourites" options={{
@@ -96,9 +96,7 @@ export default function App() {
             <MaterialCommunityIcons name="heart" color={color} size={size} />
          ),  
         }}>
-          {() => ( <Favourites recipes={recipes} onStatusChange={handleStatusChange} onDelete={handleDelete} refresh={refresh}
-    />
-  )}
+          { () => <Favourites recipes={recipes} refresh={refresh}/> }
         </Tab.Screen>
 
         <Tab.Screen name="About" options={{

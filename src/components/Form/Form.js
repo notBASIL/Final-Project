@@ -138,10 +138,10 @@ export default function Form(props) {
           defaultValue={instructions}
           style={styles.textInput}
         />
-        {/* <View>
+        <View>
           <Text style={styles.text2}>Favourite:</Text>
           <Switch value={favourite} onValueChange={handleFavouriteChange} />
-        </View> */}
+        </View>
         <Button title="Add Recipe" onPress={handleAddPress} />
         <Text>{"\n"}
         </Text>
