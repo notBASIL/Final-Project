@@ -16,6 +16,36 @@ import { MaterialCommunityIcons } from "react-native-vector-icons";
 import postData from "../../database/write";
 import { CheckBox } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
+import * as Notifications from 'expo-notifications';
+
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
+
+
+const handleFormSubmission = async () => {
+
+  await Notifications.scheduleNotificationAsync({
+
+    content: {
+
+      title: 'New Recipe Added',
+
+      body: 'A new recipe has been added to your recipe book',
+
+    },
+
+    trigger: { seconds: 1 },
+
+  });
+
+};
+
 
 export default function Form(props) {
   const [recipeName, setRecipeName] = useState("");
@@ -29,10 +59,12 @@ export default function Form(props) {
   const [favourite, setFavourite] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
+
   const handleAddPress = () => {
     if (recipeName
       && ingredient1 && instructions
     ) {
+      handleFormSubmission();
       setErrorMessage(null);
       setRecipeName("");
       setIngredient1("");

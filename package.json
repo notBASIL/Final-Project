@@ -20,8 +20,10 @@
     "react-native": "0.71.8",
     "react-native-elements": "^3.4.3",
     "react-native-material-dropdown": "^0.11.1",
+    "react-native-push-notification": "^8.1.1",
     "react-native-screens": "~3.20.0",
-    "react-uuid": "^2.0.0"
+    "react-uuid": "^2.0.0",
+    "expo-device": "~5.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
