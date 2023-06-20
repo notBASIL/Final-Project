@@ -121,6 +121,7 @@ export default function Recipe(props) {
             color: "green",
           }}
           >Favourite:</Text> */}
+
         </View>
       </Pressable>
       <Modal visible={modalVisible}>

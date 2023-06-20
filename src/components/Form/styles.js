@@ -36,10 +36,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginBottom: 10,
+        marginLeft: -16,
     },
     checkbox: {
         backgroundColor: 'transparent',
-        borderWidth: 0
+        borderWidth: 0,
     },
     textInput: {
         marginTop: 10,
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     dropdownLabel: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: 'black',
+        color: 'red',
         textAlign: 'center',
         marginTop: 10,
     },
