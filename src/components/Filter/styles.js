@@ -4,18 +4,24 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         flex: 1,
         backgroundColor: '#d2fac3',
-    },
-    dropdownLabel: {
+      },
+      dropdownLabel: {
         fontSize: 16,
         fontWeight: 'bold',
         color: 'red',
         // align the label to center
         textAlign: 'center',
         marginTop: 10,
-    },
-    dropdownContainer: {
+      },
+      dropdownContainer: {
+        flex: 1,
         paddingHorizontal: 16,
         paddingVertical: 8,
-    }
+      },
+      parentContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      }      
+      
 });
 export default styles;

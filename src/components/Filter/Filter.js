@@ -7,35 +7,72 @@ import { Picker } from '@react-native-picker/picker';
 export default function Filter(props) {
   const [recipes, setRecipes] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('breakfast'); // State to store the selected category
+  const [dietaryPreference, setDietaryPreference] = useState('All')
 
   useEffect(() => {
     // Filter recipes based on the selected category
-    const filteredRecipes = props.recipes.filter(
+    let filteredRecipes = props.recipes.filter(
       (recipe) => recipe.category === selectedCategory
     );
+
+    if(dietaryPreference === "Lactose Free") {
+      filteredRecipes = filteredRecipes.filter(
+        (recipe) => recipe.lactoseFree === true
+      );
+    }
+    else if(dietaryPreference === "Gluten Free"){
+      filteredRecipes = filteredRecipes.filter(
+        (recipe) => recipe.glutenFree === true
+      );
+    }
+    else if(dietaryPreference === "Both") {
+      filteredRecipes = filteredRecipes.filter(
+        (recipe) => (recipe.glutenFree === true && recipe.lactoseFree === true)
+      );
+    }
+
     setRecipes(filteredRecipes);
-  }, [props.recipes, selectedCategory]);
+  }, [props.recipes, selectedCategory, dietaryPreference]);
 
   const handleCategoryChange = (value) => {
     setSelectedCategory(value);
   };
 
+  const handlePreferenceChange = (value) => {
+    setDietaryPreference(value);
+  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.dropdownContainer}>
-        <Text style={styles.dropdownLabel}>Select a Category</Text>
-        <Picker
-          selectedValue={selectedCategory}
-          onValueChange={handleCategoryChange}
-          style={styles.dropdown}
-        >
-          <Picker.Item label="Breakfast" value="breakfast" />
-          <Picker.Item label="Lunch" value="Lunch" />
-          <Picker.Item label="Dinner" value="Dinner" />
-          <Picker.Item label="Snacks" value="Snacks" />
-        </Picker>
+      <View style={styles.parentContainer}>
+        <View style={styles.dropdownContainer}>
+          <Text style={styles.dropdownLabel}>Select a Category</Text>
+          <Picker
+            selectedValue={selectedCategory}
+            onValueChange={handleCategoryChange}
+            style={styles.dropdown}
+          >
+            <Picker.Item label="Breakfast" value="breakfast" />
+            <Picker.Item label="Lunch" value="Lunch" />
+            <Picker.Item label="Dinner" value="Dinner" />
+            <Picker.Item label="Snacks" value="Snacks" />
+          </Picker>
+        </View>
+        <View style={styles.dropdownContainer}>
+          <Text style={styles.dropdownLabel}>Dietary Preference</Text>
+          <Picker
+            selectedValue={dietaryPreference}
+            onValueChange={handlePreferenceChange}
+            style={styles.dropdown}
+          >
+            <Picker.Item label="All" value="All" />
+            <Picker.Item label="Lactose Free" value="Lactose Free" />
+            <Picker.Item label="Gluten Free" value="Gluten Free" />
+            <Picker.Item label="Lactose and Gluten Free" value="Both" />
+          </Picker>
+        </View>
       </View>
+
       <ScrollView>
         {
           // map through the recipe and display them or else display a message
