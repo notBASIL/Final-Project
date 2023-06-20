@@ -9,7 +9,6 @@ export default function Recipe(props) {
   const [ingredientBgColor1, setIngredientBgColor1] = useState("lightblue");
   const [ingredientBgColor2, setIngredientBgColor2] = useState("lightblue");
   const [ingredientBgColor3, setIngredientBgColor3] = useState("lightblue");
-  const [favorite, setFavorite] = useState(props.recipe.favorite);
 
   const handleModalVisible = () => {
     setModalVisible(!modalVisible);
@@ -32,7 +31,7 @@ export default function Recipe(props) {
       prevColor === "yellow" ? "lightblue" : "yellow"
     );
   };
-  
+
 
   const handleDelete = () => {
     Alert.alert("Delete Recipe", "Are you sure you want to delete this recipe?", [
@@ -44,7 +43,7 @@ export default function Recipe(props) {
         text: "Delete",
         onPress: () => {
           handleModalVisible(),
-              deleteRecipe(props.recipe.id, props.refresh);
+            deleteRecipe(props.recipe.id, props.refresh);
         },
         style: "destructive",
       },
@@ -109,6 +108,17 @@ export default function Recipe(props) {
           >
             <Text>Instructions: {props.recipe.instructions}</Text>
           </View>
+          {props.recipe.glutenFree && props.recipe.lactoseFree && (
+            <Text style={styles.label}>Gluten and Lactose Free</Text>
+          )}
+
+          {props.recipe.glutenFree && !props.recipe.lactoseFree && (
+            <Text style={styles.label}>Gluten Free</Text>
+          )}
+
+          {!props.recipe.glutenFree && props.recipe.lactoseFree && (
+            <Text style={styles.label}>Lactose Free</Text>
+          )}
           {/* <Text
           style={{
             padding: 5,

@@ -28,6 +28,17 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
 
+    label: {
+        backgroundColor: "green",
+        padding: 5,
+        borderRadius: 5,
+        fontSize: 15,
+        fontWeight: "bold",
+        width: "50%",
+        marginTop: 5,
+        textAlign: "center",
+        color: "white",
+    },
 
     // close button styling
     close: {
