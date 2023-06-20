@@ -28,22 +28,14 @@ Notifications.setNotificationHandler({
 });
 
 
-const handleFormSubmission = async () => {
-
+const handleFormSubmission = async (recipeName) => {
   await Notifications.scheduleNotificationAsync({
-
     content: {
-
-      title: 'New Recipe Added',
-
-      body: 'A new recipe has been added to your recipe book',
-
+      title: "CookBook",
+      body: `"${recipeName}" added to your recipe book`,
     },
-
     trigger: { seconds: 1 },
-
   });
-
 };
 
 
@@ -64,7 +56,7 @@ export default function Form(props) {
     if (recipeName
       && ingredient1 && instructions
     ) {
-      handleFormSubmission();
+      handleFormSubmission(recipeName);
       setErrorMessage(null);
       setRecipeName("");
       setIngredient1("");
