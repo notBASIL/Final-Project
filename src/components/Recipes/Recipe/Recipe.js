@@ -54,14 +54,21 @@ export default function Recipe(props) {
     <>
       <Pressable onPress={handleModalVisible}>
         <View style={styles.container}>
-          <Text
-            style={{
-              ...styles.headerTitle,
-              fontSize: 20,
-            }}
-          >
-            Recipe: {props.recipe.name}
-          </Text>
+          <View style={styles.headerContainer}>
+            <Text
+              style={{
+                ...styles.headerTitle,
+                fontSize: 20,
+              }}
+            >
+              Recipe: {props.recipe.name}
+            </Text>
+            {props.recipe.favourite && (
+              <View style={styles.heartContainer}>
+                <MaterialCommunityIcons name="heart" size={24} color="red" />
+              </View>
+            )}
+          </View>
           <View style={styles.ingredientContainer}>
             <Text style={styles.ingredientText}>
               Ingredient 1: {props.recipe?.ingredient1}

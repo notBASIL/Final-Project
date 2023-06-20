@@ -10,6 +10,21 @@ const styles = StyleSheet.create({
         borderColor: '#bcbcbc'
     },
 
+    headerContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+
+    headerTitle: {
+        fontSize: 20,
+        fontWeight: "bold",
+    },
+
+    heartContainer: {
+        marginLeft: 10,
+    },
+
     modalView: {
         flexDirection: 'column',
         backgroundColor: '#fff',
