@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
+import { setStatusBarBackgroundColor, StatusBar } from 'expo-status-bar';
 import { SafeAreaView, Text, View,} from 'react-native';
 import uuid from 'react-uuid';
 import Form from './src/components/Form/Form';
@@ -14,6 +14,7 @@ import Favourites from './src/components/Favourites/Favourites';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
+import { color } from 'react-native-elements/dist/helpers';
 
 
 
@@ -64,14 +65,15 @@ export default function App() {
   return (
     <NavigationContainer>
       <StatusBar style="auto" />
-      <SafeAreaView >
+      <SafeAreaView
+      >
       <Header />
 
       </SafeAreaView>
 
       <Tab.Navigator
         initialRouteName="Recipes" 
-        tabBarActiveTintColor="#e91e63"
+        tabBarActiveTintColor="red"
       >
 
         <Tab.Screen name="Recipes" options={{

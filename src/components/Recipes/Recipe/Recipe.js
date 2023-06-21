@@ -58,24 +58,25 @@ export default function Recipe(props) {
             <Text
               style={{
                 ...styles.headerTitle,
-                fontSize: 20,
+                fontSize: 22,
+                color: "#870F4F",
               }}
             >
-              Recipe: {props.recipe.name}
+              {props.recipe.name}
             </Text>
             {props.recipe.favourite && (
               <View style={styles.heartContainer}>
-                <MaterialCommunityIcons name="heart" size={24} color="red" />
+                <MaterialCommunityIcons name="heart" size={24} color="#870F4F" />
               </View>
             )}
           </View>
-          <View>
+          {/* <View>
             <Text style={{
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
               paddingTop: 10,
-              color: "green",
+              color: "#870F4F",
               fontWeight: "bold",
               fontSize: 15,
               }} >Ingredients</ Text>
@@ -100,14 +101,14 @@ export default function Recipe(props) {
                 {props.recipe.ingredient3}
               </Text>
             </View>
-          )}
-<View>
+          )} */}
+{/* <View>
             <Text style={{
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
               paddingTop: 10,
-              color: "green",
+              color: "#870F4F",
               fontWeight: "bold",
               fontSize: 15,
               }} >Instructions</ Text>
@@ -122,16 +123,14 @@ export default function Recipe(props) {
             }}
           >
             <Text>{props.recipe.instructions}</Text>
-          </View>
+          </View> */}
           <Text
             style={{
-              backgroundColor: "yellow",
-              padding: 5,
-              borderRadius: 10,
+              
+              padding: 10,
               fontSize: 15,
               fontWeight: "bold",
-              marginTop: 15,
-              textAlign: "center",
+              marginTop: 1,
               color: "black",
             }}
           >
@@ -160,13 +159,29 @@ export default function Recipe(props) {
             color: "green",
           }}
           >Favourite:</Text> */}
+<Text style={{
 
+  fontSize: 15,
+  marginTop: 10,
+  marginBottom: 10,
+  textAlign: "center",
+  color: "grey",
+}}>View Ingredients</Text>
         </View>
       </Pressable>
       <Modal visible={modalVisible}>
         <View style={styles.modalView}>
+          <Text 
+          style={{
+            fontSize: 15,
+            fontWeight: "bold",
+            color: "#870F4F",
+            textAlign: "right",
+            marginTop: -20,
+          }}>CookBook</Text>
+          
+
           <Text style={styles.headerTitle}>{props.recipe.name}</Text>
-          <Text>{props.recipe.category}</Text>
           <Pressable onPress={handleIngredientPress1}>
             <View
               style={[
@@ -212,14 +227,59 @@ export default function Recipe(props) {
             marginTop: 10,
             marginBottom: 10,
           }}>Instructions: {props.recipe.instructions}</Text>
-          <View style={styles.buttons}>
-            <Pressable onPress={handleModalVisible}>
-              <MaterialCommunityIcons name="close" size={24} color="red" />
-              <Text style={styles.close}>Close</Text>
-            </Pressable>
+          <View>
+
+          <Text
+            style={{
+              backgroundColor: "#870F4F",
+              padding: 10,
+              borderRadius: 10,
+              fontSize: 15,
+              fontWeight: "bold",
+              marginTop: 15,
+              textAlign: "center",
+              color: "white",
+            }}
+          >
+          {props.recipe?.category}
+          </Text>
+          {props.recipe.glutenFree && props.recipe.lactoseFree && (
+            <Text style={styles.label2}>Gluten and Lactose Free</Text>
+          )}
+
+          {props.recipe.glutenFree && !props.recipe.lactoseFree && (
+            <Text style={styles.label2}>Gluten Free</Text>
+          )}
+
+          {!props.recipe.glutenFree && props.recipe.lactoseFree && (
+            <Text style={styles.label2}>Lactose Free</Text>
+          )}
+
             <Pressable onPress={handleDelete}>
-              <MaterialCommunityIcons name="delete" size={24} color="red" />
-              <Text style={styles.delete}>Delete</Text>
+              <Text style={{
+                backgroundColor: "red",
+                padding: 10,
+                borderRadius: 10,
+                fontSize: 15,
+                fontWeight: "bold",
+                marginTop: 1,
+                marginBottom: 10,
+                textAlign: "center",
+                color: "white"
+              }}>Delete</Text>
+            </Pressable>
+            <Pressable onPress={handleModalVisible}>
+              <Text style={{
+                backgroundColor: "green",
+                padding: 10,
+                borderRadius: 10,
+                fontSize: 15,
+                fontWeight: "bold",
+                marginTop: 1,
+                marginBottom: 10,
+                textAlign: "center",
+                color: "white"
+              }}>Close</Text>
             </Pressable>
           </View>
         </View>

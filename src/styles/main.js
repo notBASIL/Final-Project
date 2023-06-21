@@ -1,10 +1,7 @@
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#a8d5e5',
-      alignItems: 'center',
-      justifyContent: 'center',
+  SafeAreaView: {
+      backgroundColor: '#870F4F',
     },
   });  
     export default styles;

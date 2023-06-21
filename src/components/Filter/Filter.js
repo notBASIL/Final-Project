@@ -73,7 +73,12 @@ export default function Filter(props) {
         </View>
       </View>
 
-      <ScrollView>
+      <ScrollView
+      style={{
+      padding: 12,
+
+      }}
+      >
         {
           // map through the recipe and display them or else display a message
           recipes.length > 0 ? recipes.map((recipe) => (
@@ -87,8 +92,7 @@ export default function Filter(props) {
           )) : <Text style={{
             textAlign: 'center',
             fontSize: 15,
-            marginTop: 250
-
+            marginTop: 150
           }}>You don't have any Recipes</Text>
         }
       </ScrollView>

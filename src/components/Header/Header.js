@@ -18,14 +18,14 @@ export default function Header() {
       <Text style={styles.text}>CookBook{"\n"}<Text
       style={{
         fontSize: 13,
-        color: 'black',
+        color: 'white',
         fontWeight: 'bold',
   
       }}
       >Complete Recipe App</Text></Text>
       </View>
       <TouchableWithoutFeedback>
-          <MaterialCommunityIcons style={styles.text2} name="menu" size={35} color="black" />
+          <MaterialCommunityIcons style={styles.text2} name="menu" size={35} color="white" />
         </TouchableWithoutFeedback>
 
     </View>
