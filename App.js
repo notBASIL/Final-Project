@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, Text, View,} from 'react-native';
 import uuid from 'react-uuid';
 import Form from './src/components/Form/Form';
 import Header from './src/components/Header/Header';
@@ -11,10 +11,13 @@ import getPosts from './src/database/read';
 import Filter from './src/components/Filter/Filter';
 import Favourites from './src/components/Favourites/Favourites';
 
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
+
+
+
+
 
 
 const Tab = createBottomTabNavigator();
@@ -22,7 +25,7 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   // read the data from the database and use useEffect to update the data
   const [recipes, setRecipes] = useState([]);
-
+  
   const refresh = () => {
     getPosts(setRecipes);
     console.log('data fetched')
@@ -31,6 +34,9 @@ export default function App() {
   useEffect(() => {
     refresh();
   }, []);
+
+ 
+
 
   // add a new recipe to the database
   const addRecipe = (recipe) => {
@@ -60,6 +66,7 @@ export default function App() {
       <StatusBar style="auto" />
       <SafeAreaView >
       <Header />
+
       </SafeAreaView>
 
       <Tab.Navigator

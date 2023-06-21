@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     },
     text2:
     {
-    paddingTop: 5,
+    paddingTop: 8,
     paddingRight: 15,
     },
 
