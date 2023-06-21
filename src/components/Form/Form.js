@@ -169,7 +169,7 @@ export default function Form(props) {
           onValueChange={(value) => setCategory(value)}
           style={styles.picker}
         >
-          <Picker.Item label="Breakfast" value="breakfast" />
+          <Picker.Item label="Breakfast" value="Breakfast" />
           <Picker.Item label="Lunch" value="Lunch" />
           <Picker.Item label="Dinner" value="Dinner" />
           <Picker.Item label="Snacks" value="Snacks" />

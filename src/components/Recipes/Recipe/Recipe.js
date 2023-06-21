@@ -69,16 +69,27 @@ export default function Recipe(props) {
               </View>
             )}
           </View>
+          <View>
+            <Text style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingTop: 10,
+              color: "green",
+              fontWeight: "bold",
+              fontSize: 15,
+              }} >Ingredients</ Text>
+          </View>
           <View style={styles.ingredientContainer}>
             <Text style={styles.ingredientText}>
-              Ingredient 1: {props.recipe?.ingredient1}
+              {props.recipe?.ingredient1}
             </Text>
           </View>
 
           {props.recipe?.ingredient2 && (
             <View style={styles.ingredientContainer}>
               <Text style={styles.ingredientText}>
-                Ingredient 2: {props.recipe.ingredient2}
+                {props.recipe.ingredient2}
               </Text>
             </View>
           )}
@@ -86,25 +97,22 @@ export default function Recipe(props) {
           {props.recipe?.ingredient3 && (
             <View style={styles.ingredientContainer}>
               <Text style={styles.ingredientText}>
-                Ingredient 3: {props.recipe.ingredient3}
+                {props.recipe.ingredient3}
               </Text>
             </View>
           )}
-
-          <Text
-            style={{
-              backgroundColor: "lightblue",
-              padding: 5,
-              borderRadius: 5,
-              fontSize: 15,
+<View>
+            <Text style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingTop: 10,
+              color: "green",
               fontWeight: "bold",
-              width: "100%",
-              marginTop: 20,
-              marginBottom: 10,
-            }}
-          >
-            Category: {props.recipe?.category}
-          </Text>
+              fontSize: 15,
+              }} >Instructions</ Text>
+          </View>
+          
           <View
             style={{
               flexDirection: "row",
@@ -113,8 +121,22 @@ export default function Recipe(props) {
               paddingTop: 10,
             }}
           >
-            <Text>Instructions: {props.recipe.instructions}</Text>
+            <Text>{props.recipe.instructions}</Text>
           </View>
+          <Text
+            style={{
+              backgroundColor: "yellow",
+              padding: 5,
+              borderRadius: 10,
+              fontSize: 15,
+              fontWeight: "bold",
+              marginTop: 15,
+              textAlign: "center",
+              color: "black",
+            }}
+          >
+          {props.recipe?.category}
+          </Text>
           {props.recipe.glutenFree && props.recipe.lactoseFree && (
             <Text style={styles.label}>Gluten and Lactose Free</Text>
           )}
@@ -185,7 +207,11 @@ export default function Recipe(props) {
               </View>
             </Pressable>
           )}
-          <Text>Instructions: {props.recipe.instructions}</Text>
+          <Text
+          style={{
+            marginTop: 10,
+            marginBottom: 10,
+          }}>Instructions: {props.recipe.instructions}</Text>
           <View style={styles.buttons}>
             <Pressable onPress={handleModalVisible}>
               <MaterialCommunityIcons name="close" size={24} color="red" />
