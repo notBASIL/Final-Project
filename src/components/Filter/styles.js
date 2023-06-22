@@ -3,9 +3,9 @@ const styles = StyleSheet.create({
     container: {
         alignSelf: 'stretch',
         flex: 1,
-        backgroundColor: '#d2fac3',
-    },
-    dropdownLabel: {
+        backgroundColor: '#f0efed',
+      },
+      dropdownLabel: {
         fontSize: 16,
         fontWeight: 'bold',
         color: 'red'

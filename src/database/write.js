@@ -10,11 +10,11 @@ const dbCollection = collection(db, 'posts');
 const postData = async (data, cb) => {
     addDoc(dbCollection, data)
         .then((docRef) => {
-        console.log('Success:', docRef);
-        cb();
+            console.log('Success:', docRef);
+            cb();
         })
         .catch((error) => {
-        console.error('Error:', error);
+            console.error('Error:', error);
         });
 
 }

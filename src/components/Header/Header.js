@@ -1,4 +1,5 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableWithoutFeedback } from "react-native";
+import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import styles from "./styles";
 export default function Header() {
   return (
@@ -10,12 +11,24 @@ export default function Header() {
         
       }}> 
       <Image source={require("../../../assets/book.png")} style={{
-        width: 40,
-        height: 40,
+        width: 50,
+        height: 50,
       }} />
-      <Text style={styles.text}>CookBook</Text>
+      
+      <Text style={styles.text}>CookBook{"\n"}<Text
+      style={{
+        fontSize: 13,
+        color: 'white',
+        fontWeight: 'bold',
+  
+      }}
+      >Complete Recipe App</Text></Text>
       </View>
-      <Text style={styles.text2}>Recipe App</Text>
+      <TouchableWithoutFeedback>
+          <MaterialCommunityIcons style={styles.text2} name="menu" size={35} color="white" />
+        </TouchableWithoutFeedback>
     </View>
+    
+    
   );
 }

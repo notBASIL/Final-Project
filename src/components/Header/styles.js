@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         paddingTop: 30,
         paddingBottom: 30,
         paddingLeft: 10,
-        backgroundColor: '#d2fac3',
+        backgroundColor: '#870F4F',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
@@ -20,14 +20,14 @@ const styles = StyleSheet.create({
     },
     text:
     {
-        color: '#Ff3404',
+        color: 'white',
         fontSize: 24,
         fontWeight: 'bold',
         paddingLeft: 10,
     },
     text2:
     {
-    paddingTop: 5,
+    paddingTop: 8,
     paddingRight: 15,
     },
 

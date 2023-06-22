@@ -10,13 +10,21 @@ export default function Recipes(props) {
         setRecipes(props.recipes);
     }, [props.recipes]);
 
-    const handleStatusChange = (recipeId) => {
+    const handleStatusChange = (recipeId, newStatus) => {
       setRecipes((prevRecipes) =>
         prevRecipes.map((recipe) =>
-          recipe.id === recipeId ? { ...recipe, done: !recipe.done } : recipe
+          recipe.id === recipeId ? { ...recipe, favorite: newStatus } : recipe
         )
       );
     };
+    
+    // const handleStatusChange = (recipeId) => {
+    //   setRecipes((prevRecipes) =>
+    //     prevRecipes.map((recipe) =>
+    //       recipe.id === recipeId ? { ...recipe, done: !recipe.done } : recipe
+    //     )
+    //   );
+    // };
   
     const handleDelete = (recipeId) => {
       setRecipes((prevRecipes) =>
@@ -34,13 +42,13 @@ export default function Recipes(props) {
         {
             // map through the recipe and display them or else display a message
             recipes.length > 0 ? recipes.map((recipe) => (
-                <Recipe
-                    key={recipe.id}
-                    recipe={recipe}
-                    onStatusChange={handleStatusChange}
-                    onDelete={props.onDelete}
-                    refresh={props.refresh}
-                />
+              <Recipe
+                key={recipe.id}
+                recipe={recipe}
+                onStatusChange={handleStatusChange}
+                onDelete={props.onDelete}
+                refresh={props.refresh}
+              />
             )) : <Text style={{
                 textAlign: 'center',
                 fontSize: 15,

@@ -1,8 +1,7 @@
-import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { setStatusBarBackgroundColor, StatusBar } from 'expo-status-bar';
+import { SafeAreaView, Text, View,} from 'react-native';
 import uuid from 'react-uuid';
-import { useState, useEffect } from 'react';
 import Form from './src/components/Form/Form';
 import Header from './src/components/Header/Header';
 import Recipes from './src/components/Recipes/Recipes';
@@ -12,10 +11,14 @@ import getPosts from './src/database/read';
 import Filter from './src/components/Filter/Filter';
 import Favourites from './src/components/Favourites/Favourites';
 
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
+import { color } from 'react-native-elements/dist/helpers';
+
+
+
+
 
 
 const Tab = createBottomTabNavigator();
@@ -23,7 +26,7 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   // read the data from the database and use useEffect to update the data
   const [recipes, setRecipes] = useState([]);
-
+  
   const refresh = () => {
     getPosts(setRecipes);
     console.log('data fetched')
@@ -32,6 +35,9 @@ export default function App() {
   useEffect(() => {
     refresh();
   }, []);
+
+ 
+
 
   // add a new recipe to the database
   const addRecipe = (recipe) => {
@@ -54,18 +60,20 @@ export default function App() {
     );
   };
 
-  const favoriteRecipes = recipes.filter((recipe) => recipe.done);
+  const favoriteRecipes = recipes.filter((recipe) => recipe.favorite);
 
   return (
     <NavigationContainer>
       <StatusBar style="auto" />
-      <SafeAreaView >
+      <SafeAreaView
+      >
       <Header />
+
       </SafeAreaView>
 
       <Tab.Navigator
         initialRouteName="Recipes" 
-        tabBarActiveTintColor="#e91e63"
+        tabBarActiveTintColor="red"
       >
 
         <Tab.Screen name="Recipes" options={{
@@ -89,7 +97,7 @@ export default function App() {
             <MaterialCommunityIcons name="filter" color={color} size={size} />
           ),
         }}>
-           {() => <Filter recipes={recipes} refresh={refresh}/>}
+           { () => <Filter recipes={recipes} refresh={refresh}/> }
         </Tab.Screen>
 
         <Tab.Screen name="Favourites" options={{
@@ -97,7 +105,7 @@ export default function App() {
             <MaterialCommunityIcons name="heart" color={color} size={size} />
          ),  
         }}>
-          {() => ( <Favourites favouriteRecipes={favoriteRecipes} onStatusChange={handleStatusChange} onDelete={handleDelete} refresh={refresh} /> )}
+          { () => <Favourites recipes={recipes} refresh={refresh}/> }
         </Tab.Screen>
 
         <Tab.Screen name="About" options={{

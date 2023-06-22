@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
+        padding: 10,
         alignSelf: 'stretch',
         flex: 1,
-        backgroundColor: '#d2fac3',
+        backgroundColor: '#f0efed',
     },
     
 });
