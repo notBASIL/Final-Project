@@ -136,6 +136,18 @@ export default function Recipe(props) {
           >
           {props.recipe?.category}
           </Text>
+          <Text
+            style={{
+              
+              padding: 10,
+              fontSize: 15,
+              fontWeight: "bold",
+              marginTop: 1,
+              color: "black",
+            }}
+          >
+          {props.recipe?.cuisine}
+          </Text>
           {props.recipe.glutenFree && props.recipe.lactoseFree && (
             <Text style={styles.label}>Gluten and Lactose Free</Text>
           )}

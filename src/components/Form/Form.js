@@ -49,6 +49,7 @@ export default function Form(props) {
   const [instructions, setInstructions] = useState("");
   const [category, setCategory] = useState("breakfast");
   const [favourite, setFavourite] = useState(false);
+  const [cuisine, setCuisine] = useState("Chinese"); // New state variable for cuisines
   const [errorMessage, setErrorMessage] = useState(null);
 
 
@@ -67,6 +68,7 @@ export default function Form(props) {
           favourite: favourite,
           instructions: instructions,
           category: category,
+          cuisine: cuisine, // Include cuisine in the postData
         },
         props.refresh
       );
@@ -76,6 +78,7 @@ export default function Form(props) {
       setIngredient1("");
       setIngredient2("");
       setIngredient3("");
+      setCuisine("Chinese");
       setLactoseFree(false)
       setGlutenFree(false);
       setFavourite(false);
@@ -173,6 +176,18 @@ export default function Form(props) {
           <Picker.Item label="Lunch" value="Lunch" />
           <Picker.Item label="Dinner" value="Dinner" />
           <Picker.Item label="Snacks" value="Snacks" />
+        </Picker>
+
+        <Text style={styles.dropdownLabel}>Select a Cuisines</Text>
+        <Picker 
+          selectedValue={cuisine}
+          onValueChange={(value) => setCuisine(value)}
+          style={styles.picker}
+        >
+          <Picker.Item label="Chinese" value="Chinese" />
+          <Picker.Item label="Western" value="Western" />
+          <Picker.Item label="Italian" value="Italian" />
+          <Picker.Item label="Indian" value="Indian" />
         </Picker>
 
         <TextInput
