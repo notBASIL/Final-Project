@@ -24,7 +24,7 @@ export default function Filter(props) {
   return (
     <View style={styles.container}>
       <View style={styles.dropdownContainer}>
-        <Text style={styles.dropdownLabel}>Select a category:</Text>
+        <Text style={styles.dropdownLabel}>Select a Category</Text>
         <Picker
           selectedValue={selectedCategory}
           onValueChange={handleCategoryChange}

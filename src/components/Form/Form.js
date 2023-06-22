@@ -9,7 +9,7 @@ import {
   SafeAreaView,
   Pressable,
   Alert,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import styles from "./styles";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
@@ -118,7 +118,7 @@ export default function Form(props) {
           defaultValue={ingredient3}
           style={styles.textInput}
         />
-
+        <Text style={styles.dropdownLabel}>Select a Category</Text>
         <Picker
           selectedValue={category}
           onValueChange={(value) => setCategory(value)}
@@ -143,6 +143,8 @@ export default function Form(props) {
           <Switch value={favourite} onValueChange={handleFavouriteChange} />
         </View> */}
         <Button title="Add Recipe" onPress={handleAddPress} />
+        <Text>{"\n"}
+        </Text>
       </ScrollView>
     </SafeAreaView>
   );

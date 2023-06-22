@@ -5,5 +5,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#d2fac3',
     },
+    
 });
 export default styles;
