@@ -56,17 +56,6 @@ export default function Form(props) {
     if (recipeName
       && ingredient1 && instructions
     ) {
-      handleFormSubmission(recipeName);
-      setErrorMessage(null);
-      setRecipeName("");
-      setIngredient1("");
-      setIngredient2("");
-      setIngredient3("");
-      setLactoseFree(false)
-      setGlutenFree(false);
-      setFavourite(false);
-      setInstructions("");
-      setCategory("");
       postData(
         {
           name: recipeName,
@@ -81,6 +70,17 @@ export default function Form(props) {
         },
         props.refresh
       );
+      handleFormSubmission(recipeName);
+      setErrorMessage(null);
+      setRecipeName("");
+      setIngredient1("");
+      setIngredient2("");
+      setIngredient3("");
+      setLactoseFree(false)
+      setGlutenFree(false);
+      setFavourite(false);
+      setInstructions("");
+      setCategory("breakfast");
       Keyboard.dismiss();
       Alert.alert(
         "Recipe Added",
