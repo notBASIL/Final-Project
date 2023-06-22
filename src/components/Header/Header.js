@@ -27,7 +27,6 @@ export default function Header() {
       <TouchableWithoutFeedback>
           <MaterialCommunityIcons style={styles.text2} name="menu" size={35} color="white" />
         </TouchableWithoutFeedback>
-
     </View>
     
     

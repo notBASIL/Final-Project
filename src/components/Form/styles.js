@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         alignSelf: 'stretch',
-        backgroundColor: 'lightgrey',
-        margin: 30,
-        padding: 20,
+        backgroundColor: '#f7c3df',
+        margin: 10,
+        padding: 30,
         borderRadius: 10,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
