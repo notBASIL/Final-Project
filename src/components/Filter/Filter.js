@@ -8,7 +8,7 @@ export default function Filter(props) {
   const [recipes, setRecipes] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('breakfast'); // State to store the selected category
   const [dietaryPreference, setDietaryPreference] = useState('All')
-  const [selectedCuisine, setSelectedCuisine] = useState('');
+  const [selectedCuisine, setSelectedCuisine] = useState('Chinese');
 
   useEffect(() => {
     // Filter recipes based on the selected category
