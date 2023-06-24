@@ -33,7 +33,7 @@ export default function Filter(props) {
     }
 
     setRecipes(filteredRecipes);
-  }, [props.recipes, selectedCategory, dietaryPreference]);
+  }, [props.recipes, selectedCategory, dietaryPreference, selectedCuisine]);
 
   const handleCategoryChange = (value) => {
     setSelectedCategory(value);
