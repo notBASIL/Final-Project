@@ -1,6 +1,5 @@
 import { useState } from "react";
-import {
-  View,
+import { View,
   Text,
   TextInput,
   Switch,
