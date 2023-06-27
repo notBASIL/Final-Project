@@ -50,7 +50,7 @@ export default function Form(props) {
   const [favourite, setFavourite] = useState(false);
   const [cuisine, setCuisine] = useState("Chinese"); // New state variable for cuisines
   const [errorMessage, setErrorMessage] = useState(null);
-  const [preparationTime, setPreparationTime] = useState("0-10 minutes");
+  const [preparationTime, setPreparationTime] = useState("0 - 10 minutes");
 
 
   const handleAddPress = () => {
