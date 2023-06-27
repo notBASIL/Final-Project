@@ -9,11 +9,12 @@ export default function Filter(props) {
   const [selectedCategory, setSelectedCategory] = useState('Breakfast'); // State to store the selected category
   const [dietaryPreference, setDietaryPreference] = useState('All')
   const [selectedCuisine, setSelectedCuisine] = useState('Chinese');
+  const [selectedPreparationTime, setSelectedPreparationTime] = useState('0-10 minutes');
 
   useEffect(() => {
     // Filter recipes based on the selected category
     let filteredRecipes = props.recipes.filter(
-      (recipe) => recipe.category === selectedCategory && recipe.cuisine === selectedCuisine
+      (recipe) => recipe.category === selectedCategory && recipe.cuisine === selectedCuisine && recipe.preparationTime === selectedPreparationTime
     );
 
     if (dietaryPreference === "Lactose Free") {
@@ -33,7 +34,7 @@ export default function Filter(props) {
     }
 
     setRecipes(filteredRecipes);
-  }, [props.recipes, selectedCategory, dietaryPreference, selectedCuisine]);
+  }, [props.recipes, selectedCategory, dietaryPreference, selectedCuisine, selectedPreparationTime]);
 
   const handleCategoryChange = (value) => {
     setSelectedCategory(value);
@@ -46,6 +47,11 @@ export default function Filter(props) {
   const handleCuisineChange = (value) => {
     setSelectedCuisine(value);
   };
+
+  const handlePreparationTimeChange = (value) => {
+    setSelectedPreparationTime(value);
+  };
+
 
   return (
     <View style={styles.container}>
@@ -97,6 +103,23 @@ export default function Filter(props) {
           </Picker>
 
         </View>
+        <View style={styles.dropdownContainer}>
+            <Text style={styles.dropdownLabel}>Preparation time</Text>
+            <Picker
+              selectedValue={selectedPreparationTime}
+              onValueChange={handlePreparationTimeChange}
+              style={styles.dropdown}
+            >
+              <Picker.Item label="0 - 10 minutes" value="0 - 10 minutes" />
+          <Picker.Item label="10 - 15 minutes" value="10 - 15 minutes" />
+          <Picker.Item label="15 - 20 minutes" value="15 - 20 minutes" />
+          <Picker.Item label="20 - 25 minutes" value="20 - 25 minutes" />
+          <Picker.Item label="25 - 30 minutes" value="25 - 30 minutes" />
+          <Picker.Item label="30 - 35 minutes" value="30 - 35 minutes" />
+          <Picker.Item label="35 - 40 minutes" value="35 - 40 minutes" />
+          <Picker.Item label="45+ minutes" value="45+ minutes" />
+            </Picker>
+          </View>
         {
           // map through the recipe and display them or else display a message
           recipes.length > 0 ? recipes.map((recipe) => (

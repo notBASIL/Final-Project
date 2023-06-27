@@ -50,7 +50,7 @@ export default function Form(props) {
   const [favourite, setFavourite] = useState(false);
   const [cuisine, setCuisine] = useState("Chinese"); // New state variable for cuisines
   const [errorMessage, setErrorMessage] = useState(null);
-  const [preparationTime, setPreparationTime] = useState("Select Preparation Time");
+  const [preparationTime, setPreparationTime] = useState("0-10 minutes");
 
 
   const handleAddPress = () => {
@@ -85,7 +85,7 @@ export default function Form(props) {
       setFavourite(false);
       setInstructions("");
       setCategory("Breakfast");
-      setPreparationTime("Select Preparation Time");
+      setPreparationTime("0-10 minutes");
       Keyboard.dismiss();
       Alert.alert(
         "Recipe Added",
@@ -198,13 +198,13 @@ export default function Form(props) {
           onValueChange={(value) => setPreparationTime(value)}
           style={styles.picker}
         >
-          <Picker.Item label="0-10 minutes" value="0-10 minutes" />
-          <Picker.Item label="10-15 minutes" value="10-15 minutes" />
-          <Picker.Item label="15-20 minutes" value="15-20 minutes" />
-          <Picker.Item label="20-25 minutes" value="20-25 minutes" />
-          <Picker.Item label="25-30 minutes" value="25-30 minutes" />
-          <Picker.Item label="30-35 minutes" value="30-35 minutes" />
-          <Picker.Item label="35-40 minutes" value="35-40 minutes" />
+          <Picker.Item label="0 - 10 minutes" value="0 - 10 minutes" />
+          <Picker.Item label="10 - 15 minutes" value="10 - 15 minutes" />
+          <Picker.Item label="15 - 20 minutes" value="15 - 20 minutes" />
+          <Picker.Item label="20 - 25 minutes" value="20 - 25 minutes" />
+          <Picker.Item label="25 - 30 minutes" value="25 - 30 minutes" />
+          <Picker.Item label="30 - 35 minutes" value="30 - 35 minutes" />
+          <Picker.Item label="35 - 40 minutes" value="35 - 40 minutes" />
           <Picker.Item label="45+ minutes" value="45+ minutes" />
         </Picker>
 

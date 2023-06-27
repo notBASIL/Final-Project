@@ -137,8 +137,7 @@ export default function Recipe(props) {
           {props.recipe?.category}
           </Text>
           <Text
-            style={{
-              
+            style={{   
               padding: 10,
               fontSize: 15,
               fontWeight: "bold",
@@ -147,6 +146,17 @@ export default function Recipe(props) {
             }}
           >
           {props.recipe?.cuisine}
+          </Text>
+          <Text
+            style={{
+              padding: 10,
+              fontSize: 15,
+              fontWeight: "bold",
+              marginTop: 1,
+              color: "black",
+            }}
+          >
+          Preparation time: {props.recipe?.preparationTime}
           </Text>
           {props.recipe.glutenFree && props.recipe.lactoseFree && (
             <Text style={styles.label}>Gluten and Lactose Free</Text>
@@ -237,8 +247,13 @@ export default function Recipe(props) {
           <Text
           style={{
             marginTop: 10,
-            marginBottom: 10,
+            marginBottom: 5,
           }}>Instructions: {props.recipe.instructions}</Text>
+          <Text
+          style={{
+            marginTop: 2,
+            marginBottom: 10,
+          }}>Preparation time: {props.recipe.preparationTime}</Text>
           <View>
 
           <Text
