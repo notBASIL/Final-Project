@@ -4,9 +4,9 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         backgroundColor: 'rgba(255, 255, 255, 0.7)',
         margin: 10,
-        padding: 10,
+        padding: 20,
         borderRadius: 15,
-        borderWidth: 1,
+        borderWidth: 1.5,
         borderColor: '#870F4F',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
@@ -55,15 +55,13 @@ const styles = StyleSheet.create({
     },
 
     label2: {
-        backgroundColor: "#870F4F",
-              padding: 10,
+              padding: 5,
               borderRadius: 10,
               fontSize: 15,
               fontWeight: "bold",
-              marginTop: 15,
               marginBottom: 15,
               textAlign: "center",
-              color: "white",
+              color: "#870F4F",
 
     },
 

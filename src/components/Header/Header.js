@@ -24,9 +24,9 @@ export default function Header() {
       }}
       >Complete Recipe App</Text></Text>
       </View>
-      <TouchableWithoutFeedback>
+      {/* <TouchableWithoutFeedback>
           <MaterialCommunityIcons style={styles.text2} name="menu" size={35} color="white" />
-        </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback> */}
     </View>
     
     

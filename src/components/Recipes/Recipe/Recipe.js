@@ -1,4 +1,4 @@
-import { View, Text, Pressable, Modal, Switch, Alert } from "react-native";
+import { View, Text, Pressable, Modal, Switch, Alert,} from "react-native";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import styles from "./styles";
 import { useState } from "react";
@@ -243,14 +243,13 @@ export default function Recipe(props) {
 
           <Text
             style={{
-              backgroundColor: "#870F4F",
+          
               padding: 10,
               borderRadius: 10,
               fontSize: 15,
               fontWeight: "bold",
-              marginTop: 15,
               textAlign: "center",
-              color: "white",
+              color: "#870F4F",
             }}
           >
           {props.recipe?.category}

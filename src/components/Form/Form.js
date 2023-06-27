@@ -46,7 +46,7 @@ export default function Form(props) {
   const [lactoseFree, setLactoseFree] = useState(false)
   const [glutenFree, setGlutenFree] = useState(false)
   const [instructions, setInstructions] = useState("");
-  const [category, setCategory] = useState("breakfast");
+  const [category, setCategory] = useState("Breakfast");
   const [favourite, setFavourite] = useState(false);
   const [cuisine, setCuisine] = useState("Chinese"); // New state variable for cuisines
   const [errorMessage, setErrorMessage] = useState(null);
@@ -82,7 +82,7 @@ export default function Form(props) {
       setGlutenFree(false);
       setFavourite(false);
       setInstructions("");
-      setCategory("breakfast");
+      setCategory("Breakfast");
       Keyboard.dismiss();
       Alert.alert(
         "Recipe Added",
@@ -200,9 +200,12 @@ export default function Form(props) {
         <View style={styles.switch}>
           <Switch value={favourite} onValueChange={handleFavouriteChange} />
           <Text style={styles.switchText}>Favourite</Text>
+          
         </View>
         <Button title="Add Recipe" onPress={handleAddPress} />
+        
         <Text>{"\n"}
+        </Text><Text>{"\n"}
         </Text>
       </ScrollView>
     </SafeAreaView>

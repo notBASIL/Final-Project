@@ -6,7 +6,7 @@ import { Picker } from '@react-native-picker/picker';
 
 export default function Filter(props) {
   const [recipes, setRecipes] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('breakfast'); // State to store the selected category
+  const [selectedCategory, setSelectedCategory] = useState('Breakfast'); // State to store the selected category
   const [dietaryPreference, setDietaryPreference] = useState('All')
   const [selectedCuisine, setSelectedCuisine] = useState('Chinese');
 
@@ -63,7 +63,7 @@ export default function Filter(props) {
               onValueChange={handleCategoryChange}
               style={styles.dropdown}
             >
-              <Picker.Item label="Breakfast" value="breakfast" />
+              <Picker.Item label="Breakfast" value="Breakfast" />
               <Picker.Item label="Lunch" value="Lunch" />
               <Picker.Item label="Dinner" value="Dinner" />
               <Picker.Item label="Snacks" value="Snacks" />

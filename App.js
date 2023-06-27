@@ -65,9 +65,8 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <StatusBar style="auto" />
-        <SafeAreaView
-        >
+       
+        <SafeAreaView>
           <Header />
 
         </SafeAreaView>
