@@ -65,8 +65,11 @@ export default function Form(props) {
         {
           name: recipeName,
           ingredient1: ingredient1,
+          quantity1: quantity1,
           ingredient2: ingredient2,
+          quantity2: quantity2,
           ingredient3: ingredient3,
+          quantity3: quantity3,
           lactoseFree: lactoseFree,
           glutenFree: glutenFree,
           favourite: favourite,
@@ -83,6 +86,9 @@ export default function Form(props) {
       setIngredient1("");
       setIngredient2("");
       setIngredient3("");
+      setQuantity1(0.0);
+      setQuantity2(0.0);
+      setQuantity3(0.0);
       setCuisine("Chinese");
       setLactoseFree(false)
       setGlutenFree(false);
@@ -145,9 +151,8 @@ export default function Form(props) {
           <TextInput
             placeholder="Quantity 1"
             maxLength={300}
-            value={quantity1}
+            value={quantity1 !== 0 ? quantity1.toString() : ''}
             onChangeText={(value) => setQuantity1(value)}
-            defaultValue={quantity1}
             keyboardType="numeric"
             onBlur={() => setQuantity1(parseFloat(quantity1))}
             style={styles.textInput}
@@ -167,9 +172,8 @@ export default function Form(props) {
           <TextInput
             placeholder="Quantity 2"
             maxLength={300}
-            value={quantity2}
-            onChangeText={(value) => setQuantity2(value)}
-            defaultValue={quantity2}
+            value={quantity2 !== 0 ? quantity2.toString() : ''}
+            onChangeText={(value) => setQuantity2(parseFloat(value))}
             keyboardType="numeric"
             onBlur={() => setQuantity2(parseFloat(quantity2))}
             style={styles.textInput}
@@ -188,9 +192,8 @@ export default function Form(props) {
           <TextInput
             placeholder="Quantity 3"
             maxLength={300}
-            value={quantity3}
+            value={quantity3 !== 0 ? quantity3.toString() : ''}
             onChangeText={(value) => setQuantity3(value)}
-            defaultValue={quantity3}
             keyboardType="numeric"
             onBlur={() => setQuantity3(parseFloat(quantity3))}
             style={styles.textInput}
