@@ -42,7 +42,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderWidth: 0,
     },
+    inputContainer: {
+        flexDirection: 'row', // Display the TextInput components side by side
+        justifyContent: 'space-between', // Adjust the spacing between the components
+    },
     textInput: {
+        flex: 1, // Allow the TextInput components to expand and fill the available space evenly
         marginTop: 10,
         marginBottom: 10,
         height: 40,
@@ -52,12 +57,21 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: 'white',
     },
+    parentContainer: {
+        flexDirection: 'row', // Display the components side by side
+        justifyContent: 'space-between', // Adjust the spacing between the components
+        marginBottom: 20, // Provide spacing between parent containers
+    },
+    dropdownContainer: {
+        flex: 1, // Allow the components to expand and fill the available space evenly
+        marginRight: 10, // Provide spacing between dropdown containers
+    },
     dropdownLabel: {
         fontSize: 16,
         fontWeight: 'bold',
         color: 'red',
         textAlign: 'center',
         marginTop: 10,
-    },
+    }
 });
 export default styles;

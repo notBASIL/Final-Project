@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { View,
+import {
+  View,
   Text,
   TextInput,
   Switch,
@@ -43,6 +44,9 @@ export default function Form(props) {
   const [ingredient1, setIngredient1] = useState("");
   const [ingredient2, setIngredient2] = useState("");
   const [ingredient3, setIngredient3] = useState("");
+  const [quantity1, setQuantity1] = useState(0.0)
+  const [quantity2, setQuantity2] = useState(0.0)
+  const [quantity3, setQuantity3] = useState(0.0)
   const [lactoseFree, setLactoseFree] = useState(false)
   const [glutenFree, setGlutenFree] = useState(false)
   const [instructions, setInstructions] = useState("");
@@ -128,32 +132,70 @@ export default function Form(props) {
           style={styles.textInput}
         />
 
-        <TextInput
-          placeholder="Ingredient 1 *"
-          maxLength={300}
-          value={ingredient1}
-          onChangeText={(value) => setIngredient1(value)}
-          defaultValue={ingredient1}
-          style={styles.textInput}
-        />
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Ingredient 1 *"
+            maxLength={300}
+            value={ingredient1}
+            onChangeText={(value) => setIngredient1(value)}
+            defaultValue={ingredient1}
+            style={styles.textInput}
+          />
 
-        <TextInput
-          placeholder="Ingredient 2"
-          maxLength={300}
-          value={ingredient2}
-          onChangeText={(value) => setIngredient2(value)}
-          defaultValue={ingredient2}
-          style={styles.textInput}
-        />
+          <TextInput
+            placeholder="Quantity 1"
+            maxLength={300}
+            value={quantity1}
+            onChangeText={(value) => setQuantity1(value)}
+            defaultValue={quantity1}
+            keyboardType="numeric"
+            onBlur={() => setQuantity1(parseFloat(quantity1))}
+            style={styles.textInput}
+          />
+        </View>
 
-        <TextInput
-          placeholder="Ingredient 3"
-          maxLength={300}
-          value={ingredient3}
-          onChangeText={(value) => setIngredient3(value)}
-          defaultValue={ingredient3}
-          style={styles.textInput}
-        />
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Ingredient 2"
+            maxLength={300}
+            value={ingredient2}
+            onChangeText={(value) => setIngredient2(value)}
+            defaultValue={ingredient2}
+            style={styles.textInput}
+          />
+
+          <TextInput
+            placeholder="Quantity 2"
+            maxLength={300}
+            value={quantity2}
+            onChangeText={(value) => setQuantity2(value)}
+            defaultValue={quantity2}
+            keyboardType="numeric"
+            onBlur={() => setQuantity2(parseFloat(quantity2))}
+            style={styles.textInput}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Ingredient 3"
+            maxLength={300}
+            value={ingredient3}
+            onChangeText={(value) => setIngredient3(value)}
+            defaultValue={ingredient3}
+            style={styles.textInput}
+          />
+
+          <TextInput
+            placeholder="Quantity 3"
+            maxLength={300}
+            value={quantity3}
+            onChangeText={(value) => setQuantity3(value)}
+            defaultValue={quantity3}
+            keyboardType="numeric"
+            onBlur={() => setQuantity3(parseFloat(quantity3))}
+            style={styles.textInput}
+          />
+        </View>
         <View style={styles.checkboxContainer}>
           <CheckBox
             title="Lactose free"
@@ -168,32 +210,40 @@ export default function Form(props) {
             containerStyle={styles.checkbox}
           />
         </View>
-        <Text style={styles.dropdownLabel}>Select a Category</Text>
-        <Picker
-          selectedValue={category}
-          onValueChange={(value) => setCategory(value)}
-          style={styles.picker}
-        >
-          <Picker.Item label="Breakfast" value="Breakfast" />
-          <Picker.Item label="Lunch" value="Lunch" />
-          <Picker.Item label="Dinner" value="Dinner" />
-          <Picker.Item label="Snacks" value="Snacks" />
-        </Picker>
 
-        <Text style={styles.dropdownLabel}>Select a Cuisines</Text>
-        <Picker 
-          selectedValue={cuisine}
-          onValueChange={(value) => setCuisine(value)}
-          style={styles.picker}
-        >
-          <Picker.Item label="Chinese" value="Chinese" />
-          <Picker.Item label="Western" value="Western" />
-          <Picker.Item label="Italian" value="Italian" />
-          <Picker.Item label="Indian" value="Indian" />
-        </Picker>
+        <View style={styles.parentContainer}>
+          <View style={styles.dropdownContainer}>
+            <Text style={styles.dropdownLabel}>Select a Category</Text>
+            <Picker
+              selectedValue={category}
+              onValueChange={(value) => setCategory(value)}
+              style={styles.dropdown}
+            >
+              <Picker.Item label="Breakfast" value="Breakfast" />
+              <Picker.Item label="Lunch" value="Lunch" />
+              <Picker.Item label="Dinner" value="Dinner" />
+              <Picker.Item label="Snacks" value="Snacks" />
+            </Picker>
+          </View>
+
+          <View style={styles.dropdownContainer}>
+            <Text style={styles.dropdownLabel}>Select a Cuisine</Text>
+            <Picker
+              selectedValue={cuisine}
+              onValueChange={(value) => setCuisine(value)}
+              style={styles.dropdown}
+            >
+              <Picker.Item label="Chinese" value="Chinese" />
+              <Picker.Item label="Western" value="Western" />
+              <Picker.Item label="Italian" value="Italian" />
+              <Picker.Item label="Indian" value="Indian" />
+            </Picker>
+          </View>
+        </View>
+
 
         <Text style={styles.dropdownLabel}>Select the Prepration time range</Text>
-        <Picker 
+        <Picker
           selectedValue={preparationTime}
           onValueChange={(value) => setPreparationTime(value)}
           style={styles.picker}
@@ -219,10 +269,10 @@ export default function Form(props) {
         <View style={styles.switch}>
           <Switch value={favourite} onValueChange={handleFavouriteChange} />
           <Text style={styles.switchText}>Favourite</Text>
-          
+
         </View>
         <Button title="Add Recipe" onPress={handleAddPress} />
-        
+
         <Text>{"\n"}
         </Text><Text>{"\n"}
         </Text>
