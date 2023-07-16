@@ -6,16 +6,24 @@ import { Picker } from '@react-native-picker/picker';
 
 export default function Filter(props) {
   const [recipes, setRecipes] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('Breakfast'); // State to store the selected category
+  const [selectedCategory, setSelectedCategory] = useState('All'); // State to store the selected category
   const [dietaryPreference, setDietaryPreference] = useState('All')
-  const [selectedCuisine, setSelectedCuisine] = useState('Chinese');
+  const [selectedCuisine, setSelectedCuisine] = useState('All');
   const [selectedPreparationTime, setSelectedPreparationTime] = useState('All');
 
   useEffect(() => {
     // Filter recipes based on the selected category
-    let filteredRecipes = props.recipes.filter(
-      (recipe) => recipe.category === selectedCategory && recipe.cuisine === selectedCuisine
-    );
+    let filteredRecipes = props.recipes
+    if (selectedCategory !== "All") {
+      filteredRecipes = filteredRecipes.filter(
+        (recipe) => recipe.category === selectedCategory
+      );
+    }
+    if (selectedCuisine !== "All") {
+      filteredRecipes = filteredRecipes.filter(
+        (recipe) => recipe.cuisine === selectedCuisine
+      );
+    }
     if (selectedPreparationTime !== "All") {
       filteredRecipes = filteredRecipes.filter(
         (recipe) => recipe.preparationTime === selectedPreparationTime
@@ -74,6 +82,7 @@ export default function Filter(props) {
               onValueChange={handleCategoryChange}
               style={styles.dropdown}
             >
+              <Picker.Item label="All" value="All" />
               <Picker.Item label="Breakfast" value="Breakfast" />
               <Picker.Item label="Lunch" value="Lunch" />
               <Picker.Item label="Dinner" value="Dinner" />
@@ -102,6 +111,7 @@ export default function Filter(props) {
               onValueChange={handleCuisineChange}
               style={styles.dropdown}
             >
+              <Picker.Item label="All" value="All" />
               <Picker.Item label="Chinese" value="Chinese" />
               <Picker.Item label="Western" value="Western" />
               <Picker.Item label="Italian" value="Italian" />
