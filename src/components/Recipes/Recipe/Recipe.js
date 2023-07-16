@@ -3,6 +3,8 @@ import { MaterialCommunityIcons } from "react-native-vector-icons";
 import styles from "./styles";
 import { useState } from "react";
 import deleteRecipe from "../../../database/delete";
+import updateRecipe from "../../../database/update";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 export default function Recipe(props) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -10,6 +12,7 @@ export default function Recipe(props) {
   const [ingredientBgColor2, setIngredientBgColor2] = useState("lightblue");
   const [ingredientBgColor3, setIngredientBgColor3] = useState("lightblue");
   const [isMetric, setIsMetric] = useState(true);
+  const [favourite, setFavourite] = useState(props.recipe.favourite);
 
   const handleModalVisible = () => {
     setModalVisible(!modalVisible);
@@ -33,6 +36,11 @@ export default function Recipe(props) {
     );
   };
 
+  const handleFavouriteChange = async(value) => {
+    const updated = await updateRecipe(props.recipe.id,{favourite: value}, props.refresh)
+    setFavourite(value);
+    
+  };
 
   const handleDelete = () => {
     Alert.alert("Delete Recipe", "Are you sure you want to delete this recipe?", [
@@ -170,6 +178,11 @@ export default function Recipe(props) {
           {!props.recipe.glutenFree && props.recipe.lactoseFree && (
             <Text style={styles.label}>Lactose Free</Text>
           )}
+
+          <View style={styles.switch}>
+            <Text style={styles.switchText}>Favourite</Text>
+            <Switch value={favourite} onValueChange={handleFavouriteChange}/>
+          </View>
           {/* <Text
           style={{
             padding: 5,

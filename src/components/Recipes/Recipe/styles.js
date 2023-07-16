@@ -140,6 +140,15 @@ const styles = StyleSheet.create({
     toggleSwitch: {
         alignSelf: 'flex-end',
         marginRight: 30,
+    },
+    switch: {
+        flexDirection: 'row-reverse',
+        alignItems: 'center',
+        paddingTop: Platform.OS === 'ios' ? 20 : 0
+    },
+    switchText: {
+        marginLeft: Platform.OS === 'ios' ? 10 : 0,
+        color: '#444'
     }
 });
 export default styles;
