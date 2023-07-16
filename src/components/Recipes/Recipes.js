@@ -72,6 +72,7 @@ export default function Recipes(props) {
                 onStatusChange={handleStatusChange}
                 onDelete={props.onDelete}
                 refresh={props.refresh}
+                showToggleSwitch={true}
               />
             )) : <Text style={{
                 textAlign: 'center',

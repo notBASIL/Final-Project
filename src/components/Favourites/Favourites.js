@@ -26,6 +26,7 @@ export default function Favourites(props) {
               onStatusChange={props.onStatusChange}
               onDelete={props.onDelete}
               refresh={props.refresh}
+              showToggleSwitch={false}
             />
           ))
         ) : (

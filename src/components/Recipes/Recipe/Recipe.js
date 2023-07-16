@@ -36,10 +36,10 @@ export default function Recipe(props) {
     );
   };
 
-  const handleFavouriteChange = async(value) => {
-    const updated = await updateRecipe(props.recipe.id,{favourite: value}, props.refresh)
+  const handleFavouriteChange = async (value) => {
+    const updated = await updateRecipe(props.recipe.id, { favourite: value }, props.refresh)
     setFavourite(value);
-    
+
   };
 
   const handleDelete = () => {
@@ -179,10 +179,13 @@ export default function Recipe(props) {
             <Text style={styles.label}>Lactose Free</Text>
           )}
 
-          <View style={styles.switch}>
-            <Text style={styles.switchText}>Favourite</Text>
-            <Switch value={favourite} onValueChange={handleFavouriteChange}/>
-          </View>
+          {props.showToggleSwitch && (
+            <View style={styles.switch}>
+              <Text style={styles.switchText}>Favourite</Text>
+              <Switch value={favourite} onValueChange={handleFavouriteChange} />
+            </View>
+          )}
+
           {/* <Text
           style={{
             padding: 5,
