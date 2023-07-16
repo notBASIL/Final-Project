@@ -55,13 +55,13 @@ const styles = StyleSheet.create({
     },
 
     label2: {
-              padding: 5,
-              borderRadius: 10,
-              fontSize: 15,
-              fontWeight: "bold",
-              marginBottom: 15,
-              textAlign: "center",
-              color: "#870F4F",
+        padding: 5,
+        borderRadius: 10,
+        fontSize: 15,
+        fontWeight: "bold",
+        marginBottom: 15,
+        textAlign: "center",
+        color: "#870F4F",
 
     },
 
@@ -96,8 +96,9 @@ const styles = StyleSheet.create({
 
     // switch styling
     switch: {
-        alignSelf: 'center',
-        marginTop: 10,
+        flexDirection: 'row-reverse',
+        alignItems: 'center',
+        paddingTop: Platform.OS === 'ios' ? 20 : 0
     },
 
     status: {
@@ -105,14 +106,30 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 
+    alignContainer: {
+        flexDirection: 'row', // Display the components side by side
+        justifyContent: 'space-between', // Adjust the spacing between the components
+        marginBottom: 10, // Provide spacing between parent containers
+    },
     ingredientContainer: {
+        
         backgroundColor: 'rgba(255, 255, 255, 1)',
         borderRadius: 10,
         paddingHorizontal: 10,
         paddingVertical: 5,
         marginTop: 10,
         alignSelf: 'flex-start',
-
+    },
+    quantityContainer: {
+        flex: 1, // Added to make the container take equal space
+        marginTop: 15,
+        marginLeft: 15
+    },
+    unitText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginLeft: 5,
+        marginRight: 5,
     },
     ingredientText: {
         color: 'black',

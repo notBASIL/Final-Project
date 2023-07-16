@@ -1,4 +1,4 @@
-import { View, Text, Pressable, Modal, Switch, Alert,} from "react-native";
+import { View, Text, Pressable, Modal, Switch, Alert, } from "react-native";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import styles from "./styles";
 import { useState } from "react";
@@ -9,6 +9,7 @@ export default function Recipe(props) {
   const [ingredientBgColor1, setIngredientBgColor1] = useState("lightblue");
   const [ingredientBgColor2, setIngredientBgColor2] = useState("lightblue");
   const [ingredientBgColor3, setIngredientBgColor3] = useState("lightblue");
+  const [isMetric, setIsMetric] = useState(true);
 
   const handleModalVisible = () => {
     setModalVisible(!modalVisible);
@@ -102,7 +103,7 @@ export default function Recipe(props) {
               </Text>
             </View>
           )} */}
-{/* <View>
+          {/* <View>
             <Text style={{
               flexDirection: "row",
               justifyContent: "space-between",
@@ -126,7 +127,7 @@ export default function Recipe(props) {
           </View> */}
           <Text
             style={{
-              
+
               padding: 10,
               fontSize: 15,
               fontWeight: "bold",
@@ -134,18 +135,7 @@ export default function Recipe(props) {
               color: "black",
             }}
           >
-          {props.recipe?.category}
-          </Text>
-          <Text
-            style={{   
-              padding: 10,
-              fontSize: 15,
-              fontWeight: "bold",
-              marginTop: 1,
-              color: "black",
-            }}
-          >
-          {props.recipe?.cuisine}
+            {props.recipe?.category}
           </Text>
           <Text
             style={{
@@ -156,7 +146,18 @@ export default function Recipe(props) {
               color: "black",
             }}
           >
-          Preparation time: {props.recipe?.preparationTime}
+            {props.recipe?.cuisine}
+          </Text>
+          <Text
+            style={{
+              padding: 10,
+              fontSize: 15,
+              fontWeight: "bold",
+              marginTop: 1,
+              color: "black",
+            }}
+          >
+            Preparation time: {props.recipe?.preparationTime}
           </Text>
           {props.recipe.glutenFree && props.recipe.lactoseFree && (
             <Text style={styles.label}>Gluten and Lactose Free</Text>
@@ -181,105 +182,147 @@ export default function Recipe(props) {
             color: "green",
           }}
           >Favourite:</Text> */}
-<Text style={{
+          <Text style={{
 
-  fontSize: 15,
-  marginTop: 10,
-  marginBottom: 10,
-  textAlign: "center",
-  color: "grey",
-}}>View Ingredients</Text>
+            fontSize: 15,
+            marginTop: 10,
+            marginBottom: 10,
+            textAlign: "center",
+            color: "grey",
+          }}>View Ingredients</Text>
         </View>
       </Pressable>
       <Modal visible={modalVisible}>
         <View style={styles.modalView}>
-          <Text 
-          style={{
-            fontSize: 15,
-            fontWeight: "bold",
-            color: "#870F4F",
-            textAlign: "right",
-            marginTop: -20,
-          }}>CookBook</Text>
-          
-
-          <Text style={styles.headerTitle}>{props.recipe.name}</Text>
-          <Pressable onPress={handleIngredientPress1}>
-            <View
-              style={[
-                styles.ingredientContainer,
-                { backgroundColor: ingredientBgColor1 },
-              ]}
-            >
-              <Text style={styles.ingredientText}>
-                1. {props.recipe.ingredient1}
-              </Text>
-            </View>
-          </Pressable>
-          {props.recipe.ingredient2 && (
-            <Pressable onPress={handleIngredientPress2}>
-              <View
-                style={[
-                  styles.ingredientContainer,
-                  { backgroundColor: ingredientBgColor2 },
-                ]}
-              >
-                <Text style={styles.ingredientText}>
-                  2. {props.recipe.ingredient2}
-                </Text>
-              </View>
-            </Pressable>
-          )}
-          {props.recipe.ingredient3 && (
-            <Pressable onPress={handleIngredientPress3}>
-              <View
-                style={[
-                  styles.ingredientContainer,
-                  { backgroundColor: ingredientBgColor3 },
-                ]}
-              >
-                <Text style={styles.ingredientText}>
-                  3. {props.recipe.ingredient3}
-                </Text>
-              </View>
-            </Pressable>
-          )}
-          <Text
-          style={{
-            marginTop: 10,
-            marginBottom: 5,
-          }}>Instructions: {props.recipe.instructions}</Text>
-          <Text
-          style={{
-            marginTop: 2,
-            marginBottom: 10,
-          }}>Preparation time: {props.recipe.preparationTime}</Text>
-          <View>
-
           <Text
             style={{
-          
-              padding: 10,
-              borderRadius: 10,
               fontSize: 15,
               fontWeight: "bold",
-              textAlign: "center",
               color: "#870F4F",
-            }}
-          >
-          {props.recipe?.category}
-          </Text>
-          {props.recipe.glutenFree && props.recipe.lactoseFree && (
-            <Text style={styles.label2}>Gluten and Lactose Free</Text>
-          )}
+              textAlign: "right",
+              marginTop: -20,
+            }}>CookBook</Text>
+          <View style={styles.switch}>
+            <Text style={styles.unitText}>g</Text>
+            <Switch
+              value={isMetric}
+              onValueChange={() => setIsMetric(!isMetric)}
+            />
+            <Text style={styles.unitText}>oz</Text>
+          </View>
+          <Text style={styles.headerTitle}>{props.recipe.name}</Text>
+          <View style={styles.alignContainer}>
+            <Pressable onPress={handleIngredientPress1}>
+              <View
+                style={[
+                  styles.ingredientContainer,
+                  { backgroundColor: ingredientBgColor1 },
+                ]}
+              >
+                <Text style={styles.ingredientText}>
+                  1. {props.recipe.ingredient1}
+                </Text>
+              </View>
+            </Pressable>
+            {props.recipe.quantity1 && (
+              // Quantity 1 with the switch
+              <View style={styles.quantityContainer}>
+                <Text style={styles.ingredientText}>
+                  {isMetric
+                    ? `${(props.recipe.quantity1).toFixed(2)} g`
+                    : `${(props.recipe.quantity1 * 0.03527396).toFixed(2)} oz`}
+                </Text>
+              </View>
+            )}
+          </View>
+          <View style={styles.alignContainer}>
+            {props.recipe.ingredient2 && (
+              <Pressable onPress={handleIngredientPress2}>
+                <View
+                  style={[
+                    styles.ingredientContainer,
+                    { backgroundColor: ingredientBgColor2 },
+                  ]}
+                >
+                  <Text style={styles.ingredientText}>
+                    2. {props.recipe.ingredient2}
+                  </Text>
+                </View>
+              </Pressable>
+            )}
+            {props.recipe.quantity2 && (
+              // Quantity 1 with the switch
+              <View style={styles.quantityContainer}>
+                <Text style={styles.ingredientText}>
+                  {isMetric
+                    ? `${(props.recipe.quantity2).toFixed(2)} g`
+                    : `${(props.recipe.quantity2 * 0.03527396).toFixed(2)} oz`}
+                </Text>
+              </View>
+            )}
+          </View>
+          <View style={styles.alignContainer}>
+            {props.recipe.ingredient3 && (
+              <Pressable onPress={handleIngredientPress3}>
+                <View
+                  style={[
+                    styles.ingredientContainer,
+                    { backgroundColor: ingredientBgColor3 },
+                  ]}
+                >
+                  <Text style={styles.ingredientText}>
+                    3. {props.recipe.ingredient3}
+                  </Text>
+                </View>
+              </Pressable>
+            )}
+            {props.recipe.quantity3 && (
+              // Quantity 1 with the switch
+              <View style={styles.quantityContainer}>
+                <Text style={styles.ingredientText}>
+                  {isMetric
+                    ? `${(props.recipe.quantity3).toFixed(2)} g`
+                    : `${(props.recipe.quantity3 * 0.03527396).toFixed(2)} oz`}
+                </Text>
+              </View>
+            )}
+          </View>
+          <Text
+            style={{
+              marginTop: 10,
+              marginBottom: 5,
+            }}>Instructions: {props.recipe.instructions}</Text>
+          <Text
+            style={{
+              marginTop: 2,
+              marginBottom: 10,
+            }}>Preparation time: {props.recipe.preparationTime}</Text>
+          <View>
 
-          {props.recipe.glutenFree && !props.recipe.lactoseFree && (
-            <Text style={styles.label2}>Gluten Free</Text>
-          )}
+            <Text
+              style={{
 
-          {!props.recipe.glutenFree && props.recipe.lactoseFree && (
-            <Text style={styles.label2}>Lactose Free</Text>
-          )}
+                padding: 10,
+                borderRadius: 10,
+                fontSize: 15,
+                fontWeight: "bold",
+                textAlign: "center",
+                color: "#870F4F",
+              }}
+            >
+              {props.recipe?.category}
+            </Text>
+            {props.recipe.glutenFree && props.recipe.lactoseFree && (
+              <Text style={styles.label2}>Gluten and Lactose Free</Text>
+            )}
+
+            {props.recipe.glutenFree && !props.recipe.lactoseFree && (
+              <Text style={styles.label2}>Gluten Free</Text>
+            )}
+
+            {!props.recipe.glutenFree && props.recipe.lactoseFree && (
+              <Text style={styles.label2}>Lactose Free</Text>
+            )}
 
             <Pressable onPress={handleDelete}>
               <Text style={{
