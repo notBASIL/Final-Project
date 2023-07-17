@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { setStatusBarBackgroundColor, StatusBar } from 'expo-status-bar';
-import { SafeAreaView, Text, View, } from 'react-native';
+import { SafeAreaView, Text, View,Switch } from 'react-native';
 import uuid from 'react-uuid';
 import Form from './src/components/Form/Form';
 import Header from './src/components/Header/Header';
@@ -15,9 +15,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import { color } from 'react-native-elements/dist/helpers';
-
-
-
+import { DefaultTheme, DarkTheme } from 'react-native-paper';
+import ThemeProvider from './src/components/ThemeProvider';
+import AppMainComponent from './src/components/AppMainComponent';
 
 
 
@@ -35,9 +35,6 @@ export default function App() {
   useEffect(() => {
     refresh();
   }, []);
-
-
-
 
   // add a new recipe to the database
   const addRecipe = (recipe) => {
@@ -63,14 +60,21 @@ export default function App() {
   const favoriteRecipes = recipes.filter((recipe) => recipe.favorite);
 
   return (
+    
+    
     <SafeAreaProvider>
+      
+          {/* <ThemeProvider>
+        <AppMainComponent />
+        </ThemeProvider> */}
+    
+     
       <NavigationContainer>
-       
         <SafeAreaView>
           <Header />
-
+        
         </SafeAreaView>
-
+        
         <Tab.Navigator
           initialRouteName="Recipes"
           tabBarActiveTintColor="red"
@@ -118,6 +122,8 @@ export default function App() {
 
         </Tab.Navigator>
       </NavigationContainer>
+      
     </SafeAreaProvider>
+    
   );
 }
