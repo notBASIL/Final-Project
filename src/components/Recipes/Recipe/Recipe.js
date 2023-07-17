@@ -14,7 +14,7 @@ export default function Recipe(props) {
   const [ingredientBgColor3, setIngredientBgColor3] = useState("lightblue");
   const [isMetric, setIsMetric] = useState(true);
   const [favourite, setFavourite] = useState(props.recipe.favourite);
-  
+
   const handleHeartPress = () => {
     handleFavouriteChange(!favourite);
   };
@@ -78,17 +78,19 @@ export default function Recipe(props) {
             >
               {props.recipe.name}
             </Text>
-            <TouchableOpacity onPress={handleHeartPress}>
-              {favourite ? (
-                <MaterialCommunityIcons name="heart" size={24} color="#870F4F" />
-              ) : (
-                <MaterialCommunityIcons
-                  name="heart-outline"
-                  size={24}
-                  color="#870F4F"
-                />
-              )}
-            </TouchableOpacity>
+            {props.showToggleSwitch && (
+              <TouchableOpacity onPress={handleHeartPress}>
+                {favourite ? (
+                  <MaterialCommunityIcons name="heart" size={24} color="#870F4F" />
+                ) : (
+                  <MaterialCommunityIcons
+                    name="heart-outline"
+                    size={24}
+                    color="#870F4F"
+                  />
+                )}
+              </TouchableOpacity>
+            )}
           </View>
           {/* <View>
             <Text style={{
