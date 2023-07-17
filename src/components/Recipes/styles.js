@@ -13,6 +13,16 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 10,
     },
+    button: {
+        backgroundColor: "blue",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+        marginTop: 10,
+        fontSize: 16,
+        color: "white",
+        fontWeight: "bold",
+      },
     
 });
 export default styles;

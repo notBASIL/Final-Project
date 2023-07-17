@@ -3,8 +3,10 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import styles from './styles';
 export default function About() {
 return (
+    
 
 <View>  
+    
 <Text style={{
                 textAlign: 'left',
                 fontSize: 15,

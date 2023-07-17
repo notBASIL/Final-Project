@@ -5,6 +5,7 @@ import { useState } from "react";
 import deleteRecipe from "../../../database/delete";
 import updateRecipe from "../../../database/update";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { TouchableOpacity } from "react-native";
 
 export default function Recipe(props) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -13,6 +14,10 @@ export default function Recipe(props) {
   const [ingredientBgColor3, setIngredientBgColor3] = useState("lightblue");
   const [isMetric, setIsMetric] = useState(true);
   const [favourite, setFavourite] = useState(props.recipe.favourite);
+  
+  const handleHeartPress = () => {
+    handleFavouriteChange(!favourite);
+  };
 
   const handleModalVisible = () => {
     setModalVisible(!modalVisible);
@@ -61,7 +66,7 @@ export default function Recipe(props) {
 
   return (
     <>
-      <Pressable onPress={handleModalVisible}>
+      <TouchableOpacity onPress={handleModalVisible}>
         <View style={styles.container}>
           <View style={styles.headerContainer}>
             <Text
@@ -73,11 +78,17 @@ export default function Recipe(props) {
             >
               {props.recipe.name}
             </Text>
-            {props.recipe.favourite && (
-              <View style={styles.heartContainer}>
+            <TouchableOpacity onPress={handleHeartPress}>
+              {favourite ? (
                 <MaterialCommunityIcons name="heart" size={24} color="#870F4F" />
-              </View>
-            )}
+              ) : (
+                <MaterialCommunityIcons
+                  name="heart-outline"
+                  size={24}
+                  color="#870F4F"
+                />
+              )}
+            </TouchableOpacity>
           </View>
           {/* <View>
             <Text style={{
@@ -179,12 +190,12 @@ export default function Recipe(props) {
             <Text style={styles.label}>Lactose Free</Text>
           )}
 
-          {props.showToggleSwitch && (
+          {/* {props.showToggleSwitch && (
             <View style={styles.switch}>
               <Text style={styles.switchText}>Favourite</Text>
               <Switch value={favourite} onValueChange={handleFavouriteChange} />
             </View>
-          )}
+          )} */}
 
           {/* <Text
           style={{
@@ -207,7 +218,7 @@ export default function Recipe(props) {
             color: "grey",
           }}>View Ingredients</Text>
         </View>
-      </Pressable>
+      </TouchableOpacity>
       <Modal visible={modalVisible}>
         <View style={styles.modalView}>
           <Text
