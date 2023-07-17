@@ -15,7 +15,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import { color } from 'react-native-elements/dist/helpers';
-import { DefaultTheme, DarkTheme } from 'react-native-paper';
 import ThemeProvider from './src/components/ThemeProvider';
 import AppMainComponent from './src/components/AppMainComponent';
 
