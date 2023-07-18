@@ -20,11 +20,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
 
-    headerTitle: {
-        fontSize: 20,
-        fontWeight: "bold",
-    },
-
     heartContainer: {
         marginLeft: 10,
     },
@@ -33,13 +28,28 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: 'white',
         margin: 10,
-        padding: 30,
+        padding: 20,
         borderRadius: 7,
         borderWidth: 2,
         borderColor: '#870F4F',
         marginTop: 140,
 
     },
+
+    modalHeader: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 10,
+      },
+
+      deleteIcon: {
+        marginLeft: "auto",
+      },
+
+      backIcon: {
+        marginRight: 10,
+      },
 
     // buttons styling
     buttons: {
@@ -90,7 +100,6 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: 'bold',
         color: '#870F4F',
-        paddingBottom: 5,
         alignSelf: 'flex-start',
     },
 
@@ -110,6 +119,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row', // Display the components side by side
         justifyContent: 'space-between', // Adjust the spacing between the components
         marginBottom: 10, // Provide spacing between parent containers
+        marginLeft: 20,
     },
     ingredientContainer: {
         

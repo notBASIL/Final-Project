@@ -56,6 +56,21 @@ export default function Form(props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [preparationTime, setPreparationTime] = useState("0 - 10 minutes");
 
+  const showErrorPopup = (message) => {
+    Alert.alert(
+      "Something Missing",
+      message,
+      [
+        {
+          text: "OK",
+          onPress: () => console.log("OK Pressed"),
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+  
+
 
   const handleAddPress = () => {
     if (recipeName
@@ -109,7 +124,7 @@ export default function Form(props) {
         { cancelable: false }
       );
     } else {
-      setErrorMessage("One or more required fields are missing");
+      showErrorPopup("One or more required fields are missing");
     }
 
   };
@@ -130,7 +145,7 @@ export default function Form(props) {
         )}
 
         <TextInput
-          placeholder="Enter recipe name *"
+          placeholder="Enter recipe name*"
           maxLength={150}
           value={recipeName}
           onChangeText={handleNameChange}
@@ -140,7 +155,7 @@ export default function Form(props) {
 
         <View style={styles.inputContainer}>
           <TextInput
-            placeholder="Ingredient 1 *"
+            placeholder="Ingredient 1*"
             maxLength={300}
             value={ingredient1}
             onChangeText={(value) => setIngredient1(value)}

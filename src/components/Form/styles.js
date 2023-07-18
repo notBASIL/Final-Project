@@ -2,16 +2,17 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         alignSelf: 'stretch',
-        backgroundColor: '#ffe6f3',
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
+        borderColor: '#870F4F',
         margin: 10,
-        padding: 30,
+        padding: 20,
         borderRadius: 10,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 2,
-        elevation: 1
     },
+
     text: {
         color: 'red',
         fontWeight: 'bold',
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 10,
         backgroundColor: 'white',
+        margin:10,
     },
     parentContainer: {
         flexDirection: 'row', // Display the components side by side

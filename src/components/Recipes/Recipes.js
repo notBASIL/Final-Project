@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { View, Text, ScrollView, Button, TextInput } from "react-native";
 import Recipe from "./Recipe/Recipe";
 import styles from "./styles";
+import { MaterialIcons } from "@expo/vector-icons"; // Import MaterialIcons from Expo vector icons
+import { TouchableOpacity } from "react-native"; // Import TouchableOpacity to make the button pressable
+
 
 export default function Recipes(props) {
   const [recipes, setRecipes] = useState([]);
@@ -38,6 +41,7 @@ export default function Recipes(props) {
   useEffect(() => {
     sortRecipes();
   }, [sortOrder]);
+  
 
   const handleStatusChange = (recipeId, newStatus) => {
     setRecipes((prevRecipes) =>
@@ -74,17 +78,21 @@ export default function Recipes(props) {
 
   return (
     <View style={styles.container}>
-      <Button
-        title={sortOrder === "asc" ? "Sort A-Z" : "Sort Z-A"}
-        onPress={handleSortOrderChange}
-        style={styles.button}
-      />
-      <TextInput
-        placeholder="Search recipes..."
-        value={searchQuery}
-        onChangeText={setSearchQuery}
-        style={styles.searchInput}
-      />
+      <View style={styles.header}>
+        <TextInput
+          placeholder="Search recipes..."
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+          style={styles.searchInput}
+        />
+        <TouchableOpacity onPress={handleSortOrderChange} style={styles.sortButton}>
+          {sortOrder === "asc" ? (
+            <MaterialIcons name="sort-by-alpha" size={24} color="white" />
+          ) : (
+            <MaterialIcons name="sort-by-alpha" size={24} color="white" />
+          )}
+        </TouchableOpacity>
+      </View>
       <ScrollView>
         {recipes.length > 0 ? (
           recipes.map((recipe) => (
@@ -111,4 +119,5 @@ export default function Recipes(props) {
       </ScrollView>
     </View>
   );
+  
 }

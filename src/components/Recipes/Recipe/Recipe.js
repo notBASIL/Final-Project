@@ -6,6 +6,7 @@ import deleteRecipe from "../../../database/delete";
 import updateRecipe from "../../../database/update";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TouchableOpacity } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons"; 
 
 export default function Recipe(props) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -223,23 +224,20 @@ export default function Recipe(props) {
       </TouchableOpacity>
       <Modal visible={modalVisible}>
         <View style={styles.modalView}>
-          <Text
-            style={{
-              fontSize: 15,
-              fontWeight: "bold",
-              color: "#870F4F",
-              textAlign: "right",
-              marginTop: -20,
-            }}>CookBook</Text>
-          <View style={styles.switch}>
-            <Text style={styles.unitText}>g</Text>
-            <Switch
-              value={isMetric}
-              onValueChange={() => setIsMetric(!isMetric)}
-            />
-            <Text style={styles.unitText}>oz</Text>
-          </View>
-          <Text style={styles.headerTitle}>{props.recipe.name}</Text>
+        <View style={styles.modalHeader}>
+      <TouchableOpacity onPress={handleModalVisible} style={styles.backIcon}>
+        <MaterialIcons name="keyboard-arrow-left" size={24} color="black" />
+      </TouchableOpacity>
+      <Text style={styles.headerTitle}>{props.recipe.name}</Text>
+      <TouchableOpacity onPress={handleDelete} style={styles.deleteIcon}>
+        <MaterialIcons name="delete" size={24} color="black" />
+      </TouchableOpacity>
+    </View>
+    <View style={styles.switch}>
+      <Text style={styles.unitText}>g</Text>
+      <Switch value={isMetric} onValueChange={() => setIsMetric(!isMetric)} />
+      <Text style={styles.unitText}>oz</Text>
+    </View>
           <View style={styles.alignContainer}>
             <Pressable onPress={handleIngredientPress1}>
               <View
@@ -353,7 +351,7 @@ export default function Recipe(props) {
               <Text style={styles.label2}>Lactose Free</Text>
             )}
 
-            <Pressable onPress={handleDelete}>
+            {/* <Pressable onPress={handleDelete}>
               <Text style={{
                 backgroundColor: "red",
                 padding: 10,
@@ -378,7 +376,7 @@ export default function Recipe(props) {
                 textAlign: "center",
                 color: "white"
               }}>Close</Text>
-            </Pressable>
+            </Pressable> */}
           </View>
         </View>
       </Modal>

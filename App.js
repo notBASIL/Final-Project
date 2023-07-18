@@ -62,22 +62,21 @@ export default function App() {
     
     
     <SafeAreaProvider>
-      
-          {/* <ThemeProvider>
-        <AppMainComponent />
-        </ThemeProvider> */}
-    
-     
       <NavigationContainer>
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }}>
           <Header />
-        
-        </SafeAreaView>
-        
-        <Tab.Navigator
-          initialRouteName="Recipes"
-          tabBarActiveTintColor="red"
-        >
+          <View style={{ flex: 1 }}>
+            <Tab.Navigator
+              initialRouteName="Recipes"
+              tabBarActiveTintColor="red"
+              tabBarStyle={{
+                backgroundColor: "#fff",
+                paddingBottom: 25,
+              }}
+              tabBarLabelStyle={{
+                marginBottom: 25,
+              }}
+            >
 
           <Tab.Screen name="Recipes" options={{
             tabBarIcon: ({ color, size }) => (
@@ -119,7 +118,9 @@ export default function App() {
             {() => <About onAddRecipe={addRecipe} refresh={refresh} />}
           </Tab.Screen>
 
-        </Tab.Navigator>
+        </Tab.Navigator></View>
+        <View style={{ paddingBottom: 20, backgroundColor: "white" }} />
+        </SafeAreaView>
       </NavigationContainer>
       
     </SafeAreaProvider>
