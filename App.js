@@ -5,6 +5,7 @@ import uuid from 'react-uuid';
 import Form from './src/components/Form/Form';
 import Header from './src/components/Header/Header';
 import Recipes from './src/components/Recipes/Recipes';
+import * as SplashScreen from 'expo-splash-screen';
 import styles from './src/styles/main';
 import About from './src/components/About/about';
 import getPosts from './src/database/read';
@@ -17,8 +18,6 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import { color } from 'react-native-elements/dist/helpers';
 import ThemeProvider from './src/components/ThemeProvider';
 import AppMainComponent from './src/components/AppMainComponent';
-
-
 
 const Tab = createBottomTabNavigator();
 
