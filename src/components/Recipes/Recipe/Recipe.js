@@ -159,11 +159,13 @@ export default function Recipe(props) {
               <MaterialIcons name="delete" size={24} color="black" />
             </TouchableOpacity>
           </View>
-          <View style={styles.switch}>
-            <Text style={styles.unitText}>g</Text>
-            <Switch value={isMetric} onValueChange={() => setIsMetric(!isMetric)} />
-            <Text style={styles.unitText}>oz</Text>
-          </View>
+          { !(props.recipe.quantity1 == 0.0 && props.recipe.quantity2 == 0.0 && props.recipe.quantity3 == 0.0) && (
+            <View style={styles.switch}>
+              <Text style={styles.unitText}>g</Text>
+              <Switch value={isMetric} onValueChange={() => setIsMetric(!isMetric)} />
+              <Text style={styles.unitText}>oz</Text>
+            </View>
+          )}
           <View style={styles.alignContainer}>
             <Pressable onPress={handleIngredientPress1}>
               <View
