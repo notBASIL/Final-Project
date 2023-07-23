@@ -10,9 +10,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 export default function Recipe(props) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [ingredientBgColor1, setIngredientBgColor1] = useState("lightblue");
-  const [ingredientBgColor2, setIngredientBgColor2] = useState("lightblue");
-  const [ingredientBgColor3, setIngredientBgColor3] = useState("lightblue");
+  const numIngredients = props.recipe.ingredients.length; // Replace this with the actual number of ingredients
+  const [ingredientBgColor, setIngredientBgColor] = useState(Array(numIngredients).fill("lightblue"));
   const [isMetric, setIsMetric] = useState(true);
   const [favourite, setFavourite] = useState(props.recipe.favourite);
 
@@ -24,22 +23,12 @@ export default function Recipe(props) {
     setModalVisible(!modalVisible);
   };
 
-  const handleIngredientPress1 = () => {
-    setIngredientBgColor1((prevColor) =>
-      prevColor === "yellow" ? "lightblue" : "yellow"
-    );
-  };
-
-  const handleIngredientPress2 = () => {
-    setIngredientBgColor2((prevColor) =>
-      prevColor === "yellow" ? "lightblue" : "yellow"
-    );
-  };
-
-  const handleIngredientPress3 = () => {
-    setIngredientBgColor3((prevColor) =>
-      prevColor === "yellow" ? "lightblue" : "yellow"
-    );
+  const handleIngredientPress = (index) => {
+    setIngredientBgColor((prevColors) => {
+      const newColors = [...prevColors];
+      newColors[index] = prevColors[index] === "yellow" ? "lightblue" : "yellow";
+      return newColors;
+    });
   };
 
   const handleFavouriteChange = async (value) => {
@@ -159,89 +148,42 @@ export default function Recipe(props) {
               <MaterialIcons name="delete" size={24} color="black" />
             </TouchableOpacity>
           </View>
-          { !(props.recipe.quantity1 == 0.0 && props.recipe.quantity2 == 0.0 && props.recipe.quantity3 == 0.0) && (
+          {!(props.recipe.ingredients.length === 0) && ( // Check if the ingredients list is not empty
             <View style={styles.switch}>
               <Text style={styles.unitText}>g</Text>
               <Switch value={isMetric} onValueChange={() => setIsMetric(!isMetric)} />
               <Text style={styles.unitText}>oz</Text>
             </View>
           )}
-          <View style={styles.alignContainer}>
-            <Pressable onPress={handleIngredientPress1}>
-              <View
-                style={[
-                  styles.ingredientContainer,
-                  { backgroundColor: ingredientBgColor1 },
-                ]}
-              >
-                <Text style={styles.ingredientText}>
-                  1. {props.recipe.ingredient1}
-                </Text>
-              </View>
-            </Pressable>
-            {props.recipe.quantity1 !== 0.0 && (
-              // Quantity 1 with the switch
-              <View style={styles.quantityContainer}>
-                <Text style={styles.ingredientText}>
-                  {isMetric
-                    ? `${(props.recipe.quantity1).toFixed(2)} g`
-                    : `${(props.recipe.quantity1 * 0.03527396).toFixed(2)} oz`}
-                </Text>
-              </View>
-            )}
-          </View>
-          <View style={styles.alignContainer}>
-            {props.recipe.ingredient2 !== "" && (
-              <Pressable onPress={handleIngredientPress2}>
-                <View
-                  style={[
-                    styles.ingredientContainer,
-                    { backgroundColor: ingredientBgColor2 },
-                  ]}
-                >
+          {/* Map over the ingredients list and render each ingredient and quantity */}
+          {props.recipe.ingredients.map((ingredient, index) => (
+            <View style={styles.alignContainer} key={index}>
+              {ingredient.ingredient !== "" && (
+                <Pressable onPress={() => handleIngredientPress(index)}>
+                  <View
+                    style={[
+                      styles.ingredientContainer,
+                      { backgroundColor: ingredientBgColor[index] },
+                    ]}
+                  >
+                    <Text style={styles.ingredientText}>
+                      {index + 1}. {ingredient.ingredient}
+                    </Text>
+                  </View>
+                </Pressable>
+              )}
+              {ingredient.quantity !== 0.0 && (
+                <View style={styles.quantityContainer}>
                   <Text style={styles.ingredientText}>
-                    2. {props.recipe.ingredient2}
+                    {isMetric
+                      ? `${ingredient.quantity.toFixed(2)} g`
+                      : `${(ingredient.quantity * 0.03527396).toFixed(2)} oz`}
                   </Text>
                 </View>
-              </Pressable>
-            )}
-            {props.recipe.quantity2 !== 0.0 && (
-              // Quantity 1 with the switch
-              <View style={styles.quantityContainer}>
-                <Text style={styles.ingredientText}>
-                  {isMetric
-                    ? `${(props.recipe.quantity2).toFixed(2)} g`
-                    : `${(props.recipe.quantity2 * 0.03527396).toFixed(2)} oz`}
-                </Text>
-              </View>
-            )}
-          </View>
-          <View style={styles.alignContainer}>
-            {props.recipe.ingredient3 !== "" && (
-              <Pressable onPress={handleIngredientPress3}>
-                <View
-                  style={[
-                    styles.ingredientContainer,
-                    { backgroundColor: ingredientBgColor3 },
-                  ]}
-                >
-                  <Text style={styles.ingredientText}>
-                    3. {props.recipe.ingredient3}
-                  </Text>
-                </View>
-              </Pressable>
-            )}
-            {props.recipe.quantity3 !== 0.0 && (
-              // Quantity 1 with the switch
-              <View style={styles.quantityContainer}>
-                <Text style={styles.ingredientText}>
-                  {isMetric
-                    ? `${(props.recipe.quantity3).toFixed(2)} g`
-                    : `${(props.recipe.quantity3 * 0.03527396).toFixed(2)} oz`}
-                </Text>
-              </View>
-            )}
-          </View>
+              )}
+            </View>
+          ))}
+
           <Text
             style={{
               marginTop: 10,

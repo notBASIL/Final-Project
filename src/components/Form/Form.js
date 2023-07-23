@@ -42,11 +42,7 @@ const handleFormSubmission = async (recipeName) => {
 export default function Form(props) {
   const [recipeName, setRecipeName] = useState("");
   const [ingredient1, setIngredient1] = useState("");
-  const [ingredient2, setIngredient2] = useState("");
-  const [ingredient3, setIngredient3] = useState("");
   const [quantity1, setQuantity1] = useState(0.0)
-  const [quantity2, setQuantity2] = useState(0.0)
-  const [quantity3, setQuantity3] = useState(0.0)
   const [lactoseFree, setLactoseFree] = useState(false)
   const [glutenFree, setGlutenFree] = useState(false)
   const [instructions, setInstructions] = useState("");
@@ -55,6 +51,7 @@ export default function Form(props) {
   const [cuisine, setCuisine] = useState("Chinese"); // New state variable for cuisines
   const [errorMessage, setErrorMessage] = useState(null);
   const [preparationTime, setPreparationTime] = useState("0 - 10 minutes");
+  const [ingredientsList, setIngredientsList] = useState([{ ingredient: "", quantity: 0.0 }]);
 
   const showErrorPopup = (message) => {
     Alert.alert(
@@ -69,22 +66,17 @@ export default function Form(props) {
       { cancelable: false }
     );
   };
-  
+
 
 
   const handleAddPress = () => {
     if (recipeName
-      && ingredient1 && instructions
+      && instructions
     ) {
       postData(
         {
           name: recipeName,
-          ingredient1: ingredient1,
-          quantity1: quantity1,
-          ingredient2: ingredient2,
-          quantity2: quantity2,
-          ingredient3: ingredient3,
-          quantity3: quantity3,
+          ingredients: ingredientsList,
           lactoseFree: lactoseFree,
           glutenFree: glutenFree,
           favourite: favourite,
@@ -99,11 +91,7 @@ export default function Form(props) {
       setErrorMessage(null);
       setRecipeName("");
       setIngredient1("");
-      setIngredient2("");
-      setIngredient3("");
       setQuantity1(0.0);
-      setQuantity2(0.0);
-      setQuantity3(0.0);
       setCuisine("Chinese");
       setLactoseFree(false)
       setGlutenFree(false);
@@ -111,6 +99,7 @@ export default function Form(props) {
       setInstructions("");
       setCategory("Breakfast");
       setPreparationTime("0-10 minutes");
+      setIngredientsList([{ ingredient: "", quantity: 0.0 }])
       Keyboard.dismiss();
       Alert.alert(
         "Recipe Added",
@@ -131,9 +120,22 @@ export default function Form(props) {
   const handleNameChange = (value) => {
     setRecipeName(value);
   };
-  const handleFavouriteChange = (value) => {
-    setFavourite(value);
+  // Function to handle changes in ingredient and quantity fields
+  const handleIngredientChange = (index, type, value) => {
+    const updatedIngredientsList = [...ingredientsList];
+    if (type === 'ingredient') {
+      updatedIngredientsList[index].ingredient = value;
+    } else if (type === 'quantity') {
+      updatedIngredientsList[index].quantity = parseFloat(value);
+    }
+    setIngredientsList(updatedIngredientsList);
   };
+
+  // Function to add new ingredient and quantity fields
+  const handleAddIngredientPress = () => {
+    setIngredientsList([...ingredientsList, { ingredient: "", quantity: 0.0 }]);
+  };
+
   return (
     <SafeAreaView>
       <ScrollView style={styles.container}>
@@ -153,67 +155,33 @@ export default function Form(props) {
           style={styles.textInput}
         />
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Ingredient 1*"
-            maxLength={300}
-            value={ingredient1}
-            onChangeText={(value) => setIngredient1(value)}
-            defaultValue={ingredient1}
-            style={styles.textInput}
-          />
+        {/* Render the list of ingredient and quantity fields */}
+        {ingredientsList.map((item, index) => (
+          <View key={index} style={styles.inputContainer}>
+            <TextInput
+              placeholder={`Ingredient ${index + 1}*`}
+              maxLength={300}
+              value={item.ingredient}
+              onChangeText={(value) => handleIngredientChange(index, 'ingredient', value)}
+              style={styles.textInput}
+            />
 
-          <TextInput
-            placeholder="Quantity 1"
-            maxLength={300}
-            value={quantity1 !== 0 ? quantity1.toString() : ''}
-            onChangeText={(value) => setQuantity1(value)}
-            keyboardType="numeric"
-            onBlur={() => setQuantity1(parseFloat(quantity1))}
-            style={styles.textInput}
-          />
-        </View>
+            <TextInput
+              placeholder={`Quantity ${index + 1}`}
+              maxLength={300}
+              value={item.quantity !== 0 ? item.quantity.toString() : ''}
+              onChangeText={(value) => handleIngredientChange(index, 'quantity', value)}
+              keyboardType="numeric"
+              onBlur={() => handleIngredientChange(index, 'quantity', item.quantity)}
+              style={styles.textInput}
+            />
+          </View>
+        ))}
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Ingredient 2"
-            maxLength={300}
-            value={ingredient2}
-            onChangeText={(value) => setIngredient2(value)}
-            defaultValue={ingredient2}
-            style={styles.textInput}
-          />
+        {/* Add button to add new ingredient and quantity fields */}
+        <Button title="Add Ingredient" onPress={handleAddIngredientPress} />
 
-          <TextInput
-            placeholder="Quantity 2"
-            maxLength={300}
-            value={quantity2 !== 0 ? quantity2.toString() : ''}
-            onChangeText={(value) => setQuantity2(parseFloat(value))}
-            keyboardType="numeric"
-            onBlur={() => setQuantity2(parseFloat(quantity2))}
-            style={styles.textInput}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Ingredient 3"
-            maxLength={300}
-            value={ingredient3}
-            onChangeText={(value) => setIngredient3(value)}
-            defaultValue={ingredient3}
-            style={styles.textInput}
-          />
 
-          <TextInput
-            placeholder="Quantity 3"
-            maxLength={300}
-            value={quantity3 !== 0 ? quantity3.toString() : ''}
-            onChangeText={(value) => setQuantity3(value)}
-            keyboardType="numeric"
-            onBlur={() => setQuantity3(parseFloat(quantity3))}
-            style={styles.textInput}
-          />
-        </View>
         <View style={styles.checkboxContainer}>
           <CheckBox
             title="Lactose free"
