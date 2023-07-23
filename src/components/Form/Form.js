@@ -70,8 +70,14 @@ export default function Form(props) {
 
 
   const handleAddPress = () => {
-    if (recipeName
-      && instructions
+    // Check if any of the fields are empty or have a quantity of 0.0
+    const hasEmptyFields = ingredientsList.some(
+      (item) => item.ingredient.trim() === '' || item.quantity === 0.0
+    );
+
+    if (recipeName &&
+      instructions &&
+      !hasEmptyFields
     ) {
       postData(
         {
@@ -120,13 +126,17 @@ export default function Form(props) {
   const handleNameChange = (value) => {
     setRecipeName(value);
   };
+
   // Function to handle changes in ingredient and quantity fields
   const handleIngredientChange = (index, type, value) => {
     const updatedIngredientsList = [...ingredientsList];
     if (type === 'ingredient') {
-      updatedIngredientsList[index].ingredient = value;
+      // Prevent empty ingredients from being added
+      updatedIngredientsList[index].ingredient = value.trim();
     } else if (type === 'quantity') {
-      updatedIngredientsList[index].quantity = parseFloat(value);
+      const quantity = parseFloat(value);
+      // Prevent quantities less than or equal to 0.0 from being added
+      updatedIngredientsList[index].quantity = quantity > 0 ? quantity : 0.0;
     }
     setIngredientsList(updatedIngredientsList);
   };
@@ -174,7 +184,7 @@ export default function Form(props) {
             />
 
             <TextInput
-              placeholder={`Quantity ${index + 1}`}
+              placeholder={`Quantity ${index + 1}*`}
               maxLength={300}
               value={item.quantity !== 0 ? item.quantity.toString() : ''}
               onChangeText={(value) => handleIngredientChange(index, 'quantity', value)}

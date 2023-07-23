@@ -158,29 +158,25 @@ export default function Recipe(props) {
           {/* Map over the ingredients list and render each ingredient and quantity */}
           {props.recipe.ingredients.map((ingredient, index) => (
             <View style={styles.alignContainer} key={index}>
-              {ingredient.ingredient !== "" && (
-                <Pressable onPress={() => handleIngredientPress(index)}>
-                  <View
-                    style={[
-                      styles.ingredientContainer,
-                      { backgroundColor: ingredientBgColor[index] },
-                    ]}
-                  >
-                    <Text style={styles.ingredientText}>
-                      {index + 1}. {ingredient.ingredient}
-                    </Text>
-                  </View>
-                </Pressable>
-              )}
-              {ingredient.quantity !== 0.0 && (
-                <View style={styles.quantityContainer}>
+              <Pressable onPress={() => handleIngredientPress(index)}>
+                <View
+                  style={[
+                    styles.ingredientContainer,
+                    { backgroundColor: ingredientBgColor[index] },
+                  ]}
+                >
                   <Text style={styles.ingredientText}>
-                    {isMetric
-                      ? `${ingredient.quantity.toFixed(2)} g`
-                      : `${(ingredient.quantity * 0.03527396).toFixed(2)} oz`}
+                    {index + 1}. {ingredient.ingredient}
                   </Text>
                 </View>
-              )}
+              </Pressable>
+              <View style={styles.quantityContainer}>
+                <Text style={styles.ingredientText}>
+                  {isMetric
+                    ? `${ingredient.quantity.toFixed(2)} g`
+                    : `${(ingredient.quantity * 0.03527396).toFixed(2)} oz`}
+                </Text>
+              </View>
             </View>
           ))}
 
