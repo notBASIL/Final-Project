@@ -32,6 +32,10 @@ const styles = StyleSheet.create({
         marginLeft: Platform.OS === 'ios' ? 10 : 0,
         color: '#444'
     },
+    buttonsContainer: {
+        flexDirection: 'row-reverse',
+        marginTop: 10,
+    },
     checkboxContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -57,7 +61,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 10,
         backgroundColor: 'white',
-        margin:10,
+        margin: 10,
     },
     parentContainer: {
         flexDirection: 'row', // Display the components side by side

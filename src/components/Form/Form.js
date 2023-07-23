@@ -131,6 +131,13 @@ export default function Form(props) {
     setIngredientsList(updatedIngredientsList);
   };
 
+  // Function to remove an ingredient and quantity fields
+  const handleDeleteIngredientPress = () => {
+    if (ingredientsList.length > 1) {
+      setIngredientsList(ingredientsList.slice(0, -1));
+    }
+  };
+
   // Function to add new ingredient and quantity fields
   const handleAddIngredientPress = () => {
     setIngredientsList([...ingredientsList, { ingredient: "", quantity: 0.0 }]);
@@ -178,9 +185,18 @@ export default function Form(props) {
           </View>
         ))}
 
-        {/* Add button to add new ingredient and quantity fields */}
-        <Button title="Add Ingredient" onPress={handleAddIngredientPress} />
+        {/* Add and Delete buttons side by side */}
+        <View style={styles.buttonsContainer}>
+          <Button title="Add" onPress={handleAddIngredientPress} />
 
+          {/* Delete button to remove last ingredient and quantity fields */}
+          <Button
+            title="Delete"
+            onPress={handleDeleteIngredientPress}
+            disabled={ingredientsList.length <= 1}
+            color={ingredientsList.length <= 1 ? 'gray' : 'red'}
+          />
+        </View>
 
         <View style={styles.checkboxContainer}>
           <CheckBox
