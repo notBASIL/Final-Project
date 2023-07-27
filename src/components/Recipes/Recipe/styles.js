@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         borderWidth: 2,
         borderColor: '#870F4F',
-        marginTop: 140,
+        marginTop: 40,
 
     },
 
@@ -49,6 +49,12 @@ const styles = StyleSheet.create({
 
       backIcon: {
         marginRight: 10,
+      },
+
+      editButton: {
+        marginLeft: 10,
+       
+
       },
 
     // buttons styling

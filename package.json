@@ -13,6 +13,7 @@
     "@react-native-picker/picker": "2.4.8",
     "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "^6.1.6",
+    "@react-navigation/native-stack": "^6.2.5",
     "expo": "~48.0.15",
     "expo-device": "~5.2.1",
     "expo-notifications": "~0.18.1",
