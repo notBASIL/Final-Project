@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { View, Text, ScrollView, Button, TextInput } from "react-native";
 import Recipe from "./Recipe/Recipe";
 import styles from "./styles";
@@ -41,7 +41,7 @@ export default function Recipes(props) {
   useEffect(() => {
     sortRecipes();
   }, [sortOrder]);
-  
+
 
   const handleStatusChange = (recipeId, newStatus) => {
     setRecipes((prevRecipes) =>
@@ -50,13 +50,6 @@ export default function Recipes(props) {
       )
     );
   };
-
-  const handleDelete = (recipeId) => {
-    setRecipes((prevRecipes) =>
-      prevRecipes.filter((recipe) => recipe.id !== recipeId)
-    );
-  };
-
   const favoriteRecipes = recipes.filter((recipe) => recipe.done);
 
   const sortRecipes = () => {
@@ -119,5 +112,5 @@ export default function Recipes(props) {
       </ScrollView>
     </View>
   );
-  
+
 }

@@ -1,4 +1,4 @@
-import { View, Text, Pressable, Modal, Switch, Alert, ScrollView ,TextInput, Button,Keyboard} from "react-native";
+import { View, Text, Pressable, Modal, Switch, Alert, ScrollView, TextInput, Button, Keyboard } from "react-native";
 import { CheckBox } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
 
@@ -29,10 +29,10 @@ export default function Recipe(props) {
   const [ingredientsList, setIngredientsList] = useState(props.recipe.ingredients);
 
   const numIngredients = props.recipe.ingredients.length; // Replace this with the actual number of ingredients
-  console.log(ingredientsList.length,numIngredients);
+  console.log(ingredientsList.length, numIngredients);
 
   const [ingredientBgColor, setIngredientBgColor] = useState(
-    Array(numIngredients).fill("lightblue")
+    Array(numIngredients).fill("white")
   );
   const [isMetric, setIsMetric] = useState(true);
   const [favourite, setFavourite] = useState(props.recipe.favourite);
@@ -49,7 +49,7 @@ export default function Recipe(props) {
     setIngredientBgColor((prevColors) => {
       const newColors = [...prevColors];
       newColors[index] =
-        prevColors[index] === "yellow" ? "lightblue" : "yellow";
+        prevColors[index] === "lightblue" ? "white" : "lightblue";
       return newColors;
     });
   };
@@ -175,16 +175,6 @@ export default function Recipe(props) {
 
     }
   }
-  
-
-  const [cartItems, setCartItems] = useState([]);
-
-  const handleAddToCart = () => {
-    const itemsToAdd = ingredientsList.filter(
-      (_, index) => ingredientBgColor[index] === 'lightblue'
-    );
-    setCartItems(itemsToAdd);
-  };
 
 
   return (
@@ -201,7 +191,7 @@ export default function Recipe(props) {
             >
               {props.recipe.name}
             </Text>
-            
+
             {props.showToggleSwitch && (
               <TouchableOpacity onPress={handleHeartPress}>
                 {favourite ? (
@@ -253,16 +243,6 @@ export default function Recipe(props) {
           >
             Preparation time: {props.recipe?.preparationTime}
           </Text>
-
-          <TouchableOpacity onPress={handleAddToCart}>
-          <MaterialCommunityIcons
-            name="cart-plus"
-            size={24}
-            color="#870F4F"
-            style={styles.addShoppingCartIcon}
-          />
-          </TouchableOpacity>
-
           {props.recipe.glutenFree && props.recipe.lactoseFree && (
             <Text style={styles.label}>Gluten and Lactose Free</Text>
           )}
@@ -287,125 +267,12 @@ export default function Recipe(props) {
           </Text>
         </View>
       </TouchableOpacity>
-
       <Modal visible={modalVisible}>
-      <ScrollView style={{}}>
-        <View style={styles.modalView}>
-          <View style={styles.modalHeader}>
-            <TouchableOpacity
-              onPress={handleModalVisible}
-              style={styles.backIcon}
-            >
-              <MaterialIcons
-                name="keyboard-arrow-left"
-                size={24}
-                color="black"
-              />
-            </TouchableOpacity>
-            <Text style={styles.headerTitle}>{props.recipe.name}</Text>
-            
-
-            <TouchableOpacity onPress={handleDelete} style={styles.deleteIcon}>
-              <MaterialIcons name="delete" size={24} color="black" />
-            </TouchableOpacity>
-          </View>
-          
-          {!(props.recipe.ingredients.length === 0) && ( // Check if the ingredients list is not empty
-            <View style={styles.switch}>
-              <Text style={styles.unitText}>g</Text>
-              <Switch
-                value={isMetric}
-                onValueChange={() => setIsMetric(!isMetric)}
-              />
-              <Text style={styles.unitText}>oz</Text>
-            </View>
-          )}
-          {/* Map over the ingredients list and render each ingredient and quantity */}
-          {props.recipe.ingredients.map((ingredient, index) => (
-            <View style={styles.alignContainer} key={index}>
-              <Pressable onPress={() => handleIngredientPress(index)}>
-                <View
-                  style={[
-                    styles.ingredientContainer,
-                    { backgroundColor: ingredientBgColor[index] },
-                  ]}
-                >
-                  <Text style={styles.ingredientText}>
-                    {index + 1}. {ingredient.ingredient}
-                  </Text>
-                </View>
-              </Pressable>
-              <View style={styles.quantityContainer}>
-                <Text style={styles.ingredientText}>
-                  {isMetric
-                    ? `${ingredient.quantity.toFixed(2)} g`
-                    : `${(ingredient.quantity * 0.03527396).toFixed(2)} oz`}
-                </Text>
-              </View>
-            </View>
-          ))}
-
-          <Text
-            style={{
-              marginTop: 10,
-              marginBottom: 5,
-            }}
-          >
-            Instructions: {props.recipe.instructions}
-          </Text>
-          <Text
-            style={{
-              marginTop: 2,
-              marginBottom: 10,
-            }}
-          >
-            Preparation time: {props.recipe.preparationTime}
-          </Text>
-          <View>
-            <Text
-              style={{
-                padding: 10,
-                borderRadius: 10,
-                fontSize: 15,
-                fontWeight: "bold",
-                textAlign: "center",
-                color: "#870F4F",
-              }}
-            >
-              {props.recipe?.category}
-            </Text>
-            {props.recipe.glutenFree && props.recipe.lactoseFree && (
-              <Text style={styles.label2}>Gluten and Lactose Free</Text>
-            )}
-
-            {props.recipe.glutenFree && !props.recipe.lactoseFree && (
-              <Text style={styles.label2}>Gluten Free</Text>
-            )}
-
-            {!props.recipe.glutenFree && props.recipe.lactoseFree && (
-              <Text style={styles.label2}>Lactose Free</Text>
-            )}
-            <TouchableOpacity style={styles.editButton} onPress={onHandleEdit}>
-              <MaterialCommunityIcons
-                name="file-document-edit-outline"
-                size={26}
-                color="black"
-              />
-            </TouchableOpacity>
-            <Text>{"\n"}</Text>
-          </View>
-          
-        </View>
-        </ScrollView>
-      </Modal>
-        
-        {/* Modal 2 */}
-        <Modal visible={modalVisible2}>
         <ScrollView style={{}}>
           <View style={styles.modalView}>
             <View style={styles.modalHeader}>
               <TouchableOpacity
-                onPress={() => setModalVisible2(!modalVisible2)}
+                onPress={handleModalVisible}
                 style={styles.backIcon}
               >
                 <MaterialIcons
@@ -414,24 +281,129 @@ export default function Recipe(props) {
                   color="black"
                 />
               </TouchableOpacity>
+              <Text style={styles.headerTitle}>{props.recipe.name}</Text>
+
+
+              <TouchableOpacity onPress={handleDelete} style={styles.deleteIcon}>
+                <MaterialIcons name="delete" size={24} color="black" />
+              </TouchableOpacity>
+            </View>
+
+            {!(props.recipe.ingredients.length === 0) && ( // Check if the ingredients list is not empty
+              <View style={styles.switch}>
+                <Text style={styles.unitText}>g</Text>
+                <Switch
+                  value={isMetric}
+                  onValueChange={() => setIsMetric(!isMetric)}
+                />
+                <Text style={styles.unitText}>oz</Text>
+              </View>
+            )}
+            {/* Map over the ingredients list and render each ingredient and quantity */}
+            {props.recipe.ingredients.map((ingredient, index) => (
+              <View style={styles.alignContainer} key={index}>
+                <Pressable onPress={() => handleIngredientPress(index)}>
+                  <View
+                    style={[
+                      styles.ingredientContainer,
+                      { backgroundColor: ingredientBgColor[index] },
+                    ]}
+                  >
+                    <Text style={styles.ingredientText}>
+                      {index + 1}. {ingredient.ingredient}
+                    </Text>
+                  </View>
+                </Pressable>
+                <View style={styles.quantityContainer}>
+                  <Text style={styles.ingredientText}>
+                    {isMetric
+                      ? `${ingredient.quantity.toFixed(2)} g`
+                      : `${(ingredient.quantity * 0.03527396).toFixed(2)} oz`}
+                  </Text>
+                </View>
+              </View>
+            ))}
+
+            <Text
+              style={{
+                marginTop: 10,
+                marginBottom: 5,
+              }}
+            >
+              Instructions: {props.recipe.instructions}
+            </Text>
+            <Text
+              style={{
+                marginTop: 2,
+                marginBottom: 10,
+              }}
+            >
+              Preparation time: {props.recipe.preparationTime}
+            </Text>
+            <View>
               <Text
                 style={{
-                  fontSize: 20,
+                  padding: 10,
+                  borderRadius: 10,
+                  fontSize: 15,
                   fontWeight: "bold",
+                  textAlign: "center",
                   color: "#870F4F",
-                  marginRight: 100,
                 }}
               >
-                Edit Reciepe
+                {props.recipe?.category}
               </Text>
-            </View>
-            
-              {errorMessage && (
-                <View>
-                  <Text style={formstyles.text}>Attention!</Text>
-                  <Text>{errorMessage}</Text>
-                </View>
+              {props.recipe.glutenFree && props.recipe.lactoseFree && (
+                <Text style={styles.label2}>Gluten and Lactose Free</Text>
               )}
+
+              {props.recipe.glutenFree && !props.recipe.lactoseFree && (
+                <Text style={styles.label2}>Gluten Free</Text>
+              )}
+
+              {!props.recipe.glutenFree && props.recipe.lactoseFree && (
+                <Text style={styles.label2}>Lactose Free</Text>
+              )}
+              <TouchableOpacity style={styles.editButton} onPress={onHandleEdit}>
+                <MaterialCommunityIcons
+                  name="file-document-edit-outline"
+                  size={26}
+                  color="black"
+                />
+              </TouchableOpacity>
+              <Text>{"\n"}</Text>
+            </View>
+
+          </View>
+        </ScrollView>
+
+        {/* Modal 2 */}
+        <Modal visible={modalVisible2}>
+          <ScrollView style={{}}>
+            <View style={styles.modalView}>
+              <View style={styles.modalHeader}>
+                <TouchableOpacity
+                  onPress={() => setModalVisible2(!modalVisible2)}
+                  style={styles.backIcon}
+                >
+                  <MaterialIcons
+                    name="keyboard-arrow-left"
+                    size={24}
+                    color="black"
+                  />
+                </TouchableOpacity>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: "bold",
+                    color: "#870F4F",
+                    marginRight: 100,
+                  }}
+                >
+                  Edit Reciepe
+                </Text>
+              </View>
+
 
               <TextInput
                 placeholder="Enter recipe name*"
@@ -555,35 +527,12 @@ export default function Recipe(props) {
                 defaultValue={instructions}
                 style={formstyles.textInput}
               />
-              <Button title="Save changes" onPress={handleEditSubission}/>
+              <Button title="Save changes" onPress={handleEditSubission} />
               <Text>{"\n"}</Text>
-            
-          </View>
+
+            </View>
           </ScrollView>
         </Modal>
-
-        {/* Shopping Cart Modal */}
-      <Modal visible={cartItems.length > 0} transparent={true} animationType="slide">
-        <View style={styles.cartModalContainer}>
-          <View style={styles.cartModal}>
-            <Text style={styles.cartModalTitle}>Shopping Cart</Text>
-            <Text style={styles.cartModalRecipeName}>{props.recipe.name}</Text>
-            <ScrollView>
-              {cartItems.map((item, index) => (
-                <View key={index} style={styles.cartItem}>
-                  <Text>{item.ingredient}</Text>
-                  <Text>{item.quantity.toFixed(2)} g</Text>
-                </View>
-              ))}
-            </ScrollView>
-            <TouchableOpacity
-              style={styles.cartModalCloseButton}
-              onPress={() => setCartItems([])}
-            >
-              <Text style={styles.cartModalCloseButtonText}>Close</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
       </Modal>
     </>
   );
