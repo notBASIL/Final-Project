@@ -24,6 +24,21 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
 
+    stepperContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 10,
+    },
+    stepperButton: {
+        padding: 10,
+    },
+    stepperValue: {
+        fontSize: 20,
+        fontWeight: "bold",
+        marginHorizontal: 20,
+    },
+
     modalView: {
         flexDirection: 'column',
         backgroundColor: 'white',
@@ -41,21 +56,21 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         marginBottom: 10,
-      },
+    },
 
-      deleteIcon: {
+    deleteIcon: {
         marginLeft: "auto",
-      },
+    },
 
-      backIcon: {
+    backIcon: {
         marginRight: 10,
-      },
+    },
 
-      editButton: {
+    editButton: {
         marginLeft: 10,
-       
 
-      },
+
+    },
 
     // buttons styling
     buttons: {
@@ -128,7 +143,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
     },
     ingredientContainer: {
-        
+
         backgroundColor: 'rgba(255, 255, 255, 1)',
         borderRadius: 10,
         paddingHorizontal: 10,

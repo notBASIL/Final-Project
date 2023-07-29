@@ -28,6 +28,7 @@ export default function Recipe(props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [preparationTime, setPreparationTime] = useState(props.recipe.preparationTime);
   const [ingredientsList, setIngredientsList] = useState(props.recipe.ingredients);
+  const [servingSize, setServingSize] = useState(1)
 
   const numIngredients = props.recipe.ingredients.length; // Replace this with the actual number of ingredients
   console.log(ingredientsList.length, numIngredients);
@@ -40,6 +41,17 @@ export default function Recipe(props) {
 
   const handleHeartPress = () => {
     handleFavouriteChange(!favourite);
+  };
+
+  // New functions to handle serving size changes
+  const handleIncrementServingSize = () => {
+    setServingSize((prevServingSize) => prevServingSize + 1);
+  };
+
+  const handleDecrementServingSize = () => {
+    setServingSize((prevServingSize) =>
+      prevServingSize > 1 ? prevServingSize - 1 : 1
+    );
   };
 
   const handleModalVisible = () => {
@@ -89,7 +101,19 @@ export default function Recipe(props) {
     // console.log(props.recipe.id);
   };
 
-
+  const Stepper = ({ value, onIncrement, onDecrement }) => {
+    return (
+      <View style={styles.stepperContainer}>
+        <TouchableOpacity onPress={onDecrement} style={styles.stepperButton}>
+          <MaterialCommunityIcons name="minus" size={24} color="black" />
+        </TouchableOpacity>
+        <Text style={styles.stepperValue}>{value}</Text>
+        <TouchableOpacity onPress={onIncrement} style={styles.stepperButton}>
+          <MaterialCommunityIcons name="plus" size={24} color="black" />
+        </TouchableOpacity>
+      </View>
+    );
+  };
 
   const handleNameChange = (value) => {
     setRecipeName(value);
@@ -317,6 +341,14 @@ export default function Recipe(props) {
                 <Text style={styles.unitText}>oz</Text>
               </View>
             )}
+
+            {/* New Stepper component */}
+            <Stepper
+              value={servingSize}
+              onIncrement={handleIncrementServingSize}
+              onDecrement={handleDecrementServingSize}
+            />
+
             {/* Map over the ingredients list and render each ingredient and quantity */}
             {props.recipe.ingredients.map((ingredient, index) => (
               <View style={styles.alignContainer} key={index}>
@@ -335,8 +367,8 @@ export default function Recipe(props) {
                 <View style={styles.quantityContainer}>
                   <Text style={styles.ingredientText}>
                     {isMetric
-                      ? `${ingredient.quantity.toFixed(2)} g`
-                      : `${(ingredient.quantity * 0.03527396).toFixed(2)} oz`}
+                      ? `${(ingredient.quantity * servingSize).toFixed(2)} g`
+                      : `${(ingredient.quantity * servingSize * 0.03527396).toFixed(2)} oz`}
                   </Text>
                 </View>
               </View>
