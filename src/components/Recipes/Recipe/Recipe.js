@@ -123,7 +123,7 @@ export default function Recipe(props) {
 
   const handleAddToCart = () => {
     const itemsToAdd = ingredientsList.filter(
-      (_, index) => ingredientBgColor[index] === 'lightblue'
+      (_, index) => ingredientBgColor[index] === 'white'
     );
     setCartItems(itemsToAdd);
   };
