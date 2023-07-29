@@ -175,6 +175,16 @@ export default function Recipe(props) {
 
     }
   }
+  
+
+  const [cartItems, setCartItems] = useState([]);
+
+  const handleAddToCart = () => {
+    const itemsToAdd = ingredientsList.filter(
+      (_, index) => ingredientBgColor[index] === 'lightblue'
+    );
+    setCartItems(itemsToAdd);
+  };
 
 
   return (
@@ -243,6 +253,16 @@ export default function Recipe(props) {
           >
             Preparation time: {props.recipe?.preparationTime}
           </Text>
+
+          <TouchableOpacity onPress={handleAddToCart}>
+          <MaterialCommunityIcons
+            name="cart-plus"
+            size={24}
+            color="#870F4F"
+            style={styles.addShoppingCartIcon}
+          />
+          </TouchableOpacity>
+
           {props.recipe.glutenFree && props.recipe.lactoseFree && (
             <Text style={styles.label}>Gluten and Lactose Free</Text>
           )}
@@ -267,6 +287,7 @@ export default function Recipe(props) {
           </Text>
         </View>
       </TouchableOpacity>
+
       <Modal visible={modalVisible}>
       <ScrollView style={{}}>
         <View style={styles.modalView}>
@@ -376,6 +397,7 @@ export default function Recipe(props) {
           
         </View>
         </ScrollView>
+      </Modal>
         
         {/* Modal 2 */}
         <Modal visible={modalVisible2}>
@@ -539,6 +561,29 @@ export default function Recipe(props) {
           </View>
           </ScrollView>
         </Modal>
+
+        {/* Shopping Cart Modal */}
+      <Modal visible={cartItems.length > 0} transparent={true} animationType="slide">
+        <View style={styles.cartModalContainer}>
+          <View style={styles.cartModal}>
+            <Text style={styles.cartModalTitle}>Shopping Cart</Text>
+            <Text style={styles.cartModalRecipeName}>{props.recipe.name}</Text>
+            <ScrollView>
+              {cartItems.map((item, index) => (
+                <View key={index} style={styles.cartItem}>
+                  <Text>{item.ingredient}</Text>
+                  <Text>{item.quantity.toFixed(2)} g</Text>
+                </View>
+              ))}
+            </ScrollView>
+            <TouchableOpacity
+              style={styles.cartModalCloseButton}
+              onPress={() => setCartItems([])}
+            >
+              <Text style={styles.cartModalCloseButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </Modal>
     </>
   );
