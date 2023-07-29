@@ -15,6 +15,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 export default function Recipe(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
 
   const [recipeName, setRecipeName] = useState(props.recipe.name);
   const [ingredient1, setIngredient1] = useState("");
@@ -118,6 +119,13 @@ export default function Recipe(props) {
   // Function to add new ingredient and quantity fields
   const handleAddIngredientPress = () => {
     setIngredientsList([...ingredientsList, { ingredient: "", quantity: 0.0 }]);
+  };
+
+  const handleAddToCart = () => {
+    const itemsToAdd = ingredientsList.filter(
+      (_, index) => ingredientBgColor[index] === 'lightblue'
+    );
+    setCartItems(itemsToAdd);
   };
 
   const handleEditSubission = async () => {
@@ -243,6 +251,16 @@ export default function Recipe(props) {
           >
             Preparation time: {props.recipe?.preparationTime}
           </Text>
+
+          <TouchableOpacity onPress={handleAddToCart}>
+            <MaterialCommunityIcons
+              name="cart-plus"
+              size={24}
+              color="#870F4F"
+              style={styles.addShoppingCartIcon}
+            />
+          </TouchableOpacity>
+
           {props.recipe.glutenFree && props.recipe.lactoseFree && (
             <Text style={styles.label}>Gluten and Lactose Free</Text>
           )}
@@ -533,6 +551,29 @@ export default function Recipe(props) {
             </View>
           </ScrollView>
         </Modal>
+      </Modal>
+      {/* Shopping Cart Modal */}
+      <Modal visible={cartItems.length > 0} transparent={true} animationType="slide">
+        <View style={styles.cartModalContainer}>
+          <View style={styles.cartModal}>
+            <Text style={styles.cartModalTitle}>Shopping Cart</Text>
+            <Text style={styles.cartModalRecipeName}>{props.recipe.name}</Text>
+            <ScrollView>
+              {cartItems.map((item, index) => (
+                <View key={index} style={styles.cartItem}>
+                  <Text>{item.ingredient}</Text>
+                  <Text>{item.quantity.toFixed(2)} g</Text>
+                </View>
+              ))}
+            </ScrollView>
+            <TouchableOpacity
+              style={styles.cartModalCloseButton}
+              onPress={() => setCartItems([])}
+            >
+              <Text style={styles.cartModalCloseButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </Modal>
     </>
   );
