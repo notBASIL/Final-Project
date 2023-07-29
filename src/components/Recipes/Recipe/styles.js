@@ -30,13 +30,19 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 10,
     },
-    stepperButton: {
-        padding: 10,
+    stepperPlus: {
+        padding: 1,
+        backgroundColor: 'green'
+    },
+    stepperMinus: {
+        padding: 1,
+        backgroundColor: 'red',
+        marginLeft: 5
     },
     stepperValue: {
         fontSize: 20,
         fontWeight: "bold",
-        marginHorizontal: 20,
+        marginHorizontal: 10,
     },
 
     modalView: {
@@ -68,8 +74,17 @@ const styles = StyleSheet.create({
 
     editButton: {
         marginLeft: 10,
+    },
 
+    container2: {
+        flexDirection: 'row', // Arrange children horizontally
+        justifyContent: 'space-between', // Space out the children evenly along the main axis
+        alignItems: 'center', // Center the children along the cross axis
+    },
 
+    unitText: {
+        fontSize: 16,
+        marginHorizontal: 5, // Add some horizontal margin between the switch and text
     },
 
     // buttons styling

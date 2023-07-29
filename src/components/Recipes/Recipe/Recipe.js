@@ -104,11 +104,12 @@ export default function Recipe(props) {
   const Stepper = ({ value, onIncrement, onDecrement }) => {
     return (
       <View style={styles.stepperContainer}>
-        <TouchableOpacity onPress={onDecrement} style={styles.stepperButton}>
+        <Text style={styles.unitText}>Serving Units</Text>
+        <TouchableOpacity onPress={onDecrement} style={styles.stepperMinus}>
           <MaterialCommunityIcons name="minus" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.stepperValue}>{value}</Text>
-        <TouchableOpacity onPress={onIncrement} style={styles.stepperButton}>
+        <TouchableOpacity onPress={onIncrement} style={styles.stepperPlus}>
           <MaterialCommunityIcons name="plus" size={24} color="black" />
         </TouchableOpacity>
       </View>
@@ -325,13 +326,29 @@ export default function Recipe(props) {
               </TouchableOpacity>
               <Text style={styles.headerTitle}>{props.recipe.name}</Text>
 
+              <TouchableOpacity style={styles.editButton} onPress={onHandleEdit}>
+                <MaterialCommunityIcons
+                  name="file-document-edit-outline"
+                  size={26}
+                  color="black"
+                />
+              </TouchableOpacity>
 
               <TouchableOpacity onPress={handleDelete} style={styles.deleteIcon}>
                 <MaterialIcons name="delete" size={24} color="black" />
               </TouchableOpacity>
             </View>
 
-            {!(props.recipe.ingredients.length === 0) && ( // Check if the ingredients list is not empty
+
+            <View style={styles.container2}>
+              {/* Stepper component on the left */}
+              <Stepper
+                value={servingSize}
+                onIncrement={handleIncrementServingSize}
+                onDecrement={handleDecrementServingSize}
+              />
+
+              {/* Switch component on the right */}
               <View style={styles.switch}>
                 <Text style={styles.unitText}>g</Text>
                 <Switch
@@ -340,14 +357,7 @@ export default function Recipe(props) {
                 />
                 <Text style={styles.unitText}>oz</Text>
               </View>
-            )}
-
-            {/* New Stepper component */}
-            <Stepper
-              value={servingSize}
-              onIncrement={handleIncrementServingSize}
-              onDecrement={handleDecrementServingSize}
-            />
+            </View>
 
             {/* Map over the ingredients list and render each ingredient and quantity */}
             {props.recipe.ingredients.map((ingredient, index) => (
@@ -414,13 +424,6 @@ export default function Recipe(props) {
               {!props.recipe.glutenFree && props.recipe.lactoseFree && (
                 <Text style={styles.label2}>Lactose Free</Text>
               )}
-              <TouchableOpacity style={styles.editButton} onPress={onHandleEdit}>
-                <MaterialCommunityIcons
-                  name="file-document-edit-outline"
-                  size={26}
-                  color="black"
-                />
-              </TouchableOpacity>
               <Text>{"\n"}</Text>
             </View>
 
