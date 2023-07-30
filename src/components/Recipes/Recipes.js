@@ -126,57 +126,61 @@ export default function Recipes(props) {
           </Text>
         )}
         <View>
-        <Button title="Show all hidden recipes" onPress={handleShowAll} />
+          <Button title="Show all hidden recipes" onPress={handleShowAll} />
         </View>
 
-       
+
       </ScrollView>
       <Modal visible={modalVisible} style={{
-              flexDirection: "column",
-              backgroundColor: "white",
-              margin: 0,
-              padding: 20,
-              borderRadius: 7,
-              borderWidth: 2,
-              borderColor: "#870F4F",
-              marginTop: 0,
-            }}>
-         <TouchableOpacity
-                onPress={handleShowAll}
-              >
-                <MaterialIcons
-                  name="keyboard-arrow-left"
-                  size={24}
-                  color="black"
-                />
-              </TouchableOpacity>
-          <ScrollView style={{}}>
+        flexDirection: "column",
+        backgroundColor: "white",
+        margin: 0,
+        padding: 20,
+        borderRadius: 7,
+        borderWidth: 2,
+        borderColor: "#870F4F",
+        marginTop: 0,
+      }}>
+        <TouchableOpacity
+          onPress={handleShowAll}
+        >
+          <MaterialIcons
+            name="keyboard-arrow-left"
+            size={24}
+            color="black"
+          />
+        </TouchableOpacity>
+        <ScrollView style={{}}>
           <View
-            
+
           >
-            {modalVisible
-              ? hiddenReciepes.map(
-                  (recipe) => (
-                    console.log(recipe),
-                    (
-                      <Recipe
-                        key={recipe.id}
-                        recipe={recipe}
-                        onStatusChange={handleStatusChange}
-                        onDelete={props.onDelete}
-                        refresh={props.refresh}
-                        showToggleSwitch={true}
-                        isHidden={true}
-                      />
-                    )
+            {modalVisible ? (
+              hiddenReciepes.length === 0 ? (
+
+                <Text style={styles.centeredText}>You Don't have any hidden recipes</Text>
+
+              ) : (
+                hiddenReciepes.map((recipe) => (
+                  console.log(recipe),
+                  (
+                    <Recipe
+                      key={recipe.id}
+                      recipe={recipe}
+                      onStatusChange={handleStatusChange}
+                      onDelete={props.onDelete}
+                      refresh={props.refresh}
+                      showToggleSwitch={true}
+                      isHidden={true}
+                    />
                   )
-                )
-              : null}
+                ))
+              )
+            ) : null}
           </View>
-            </ScrollView>
-        
-          <View />
-        </Modal>
+        </ScrollView>
+
+        <View />
+      </Modal>
     </View>
   );
 }

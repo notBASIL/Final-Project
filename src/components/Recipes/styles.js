@@ -25,6 +25,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 10,
   },
+  centeredText: {
+    textAlign: 'center',
+    fontSize: 15,
+    marginHorizontal: 40, // Add some horizontal margin to the text
+  }
 });
 
 export default styles;
