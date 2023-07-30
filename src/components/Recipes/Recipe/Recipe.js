@@ -226,11 +226,13 @@ export default function Recipe(props) {
   const onHide = () => {
     console.log("hide");
     handleEditSubission(true);
+    setHide(true);
   };
 
   const unHide = () => {
     console.log("unhide");
     handleEditSubission(false);
+    setHide(false);
   };
 
   return (
@@ -630,7 +632,7 @@ export default function Recipe(props) {
                 defaultValue={instructions}
                 style={formstyles.textInput}
               />
-              <Button title="Save changes" onPress={handleEditSubission} />
+              <Button title="Save changes" onPress={()=>handleEditSubission(props.recipe.isHide)} />
               <Text>{"\n"}</Text>
             </View>
           </ScrollView>
