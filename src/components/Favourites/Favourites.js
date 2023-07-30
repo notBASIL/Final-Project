@@ -27,6 +27,7 @@ export default function Favourites(props) {
               onDelete={props.onDelete}
               refresh={props.refresh}
               showToggleSwitch={false}
+              isHidden={"Not required"}
             />
           ))
         ) : (

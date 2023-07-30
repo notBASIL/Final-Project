@@ -77,6 +77,7 @@ export default function App() {
               }}
             >
 
+
           <Tab.Screen name="Recipes" options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="format-list-bulleted" color={color} size={size} />

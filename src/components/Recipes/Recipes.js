@@ -4,12 +4,14 @@ import Recipe from "./Recipe/Recipe";
 import styles from "./styles";
 import { MaterialIcons } from "@expo/vector-icons"; // Import MaterialIcons from Expo vector icons
 import { TouchableOpacity } from "react-native"; // Import TouchableOpacity to make the button pressable
-
+import { Modal } from "react-native-paper";
 
 export default function Recipes(props) {
   const [recipes, setRecipes] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     if (searchQuery) {
@@ -42,7 +44,6 @@ export default function Recipes(props) {
     sortRecipes();
   }, [sortOrder]);
 
-
   const handleStatusChange = (recipeId, newStatus) => {
     setRecipes((prevRecipes) =>
       prevRecipes.map((recipe) =>
@@ -51,6 +52,8 @@ export default function Recipes(props) {
     );
   };
   const favoriteRecipes = recipes.filter((recipe) => recipe.done);
+
+  const hiddenReciepes = recipes.filter((recipe) => recipe.isHide);
 
   const sortRecipes = () => {
     const sortedRecipes = [...recipes].sort((a, b) => {
@@ -69,6 +72,10 @@ export default function Recipes(props) {
     setSortOrder((prevSortOrder) => (prevSortOrder === "asc" ? "desc" : "asc"));
   };
 
+  const handleShowAll = () => {
+    setModalVisible(!modalVisible);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -78,7 +85,10 @@ export default function Recipes(props) {
           onChangeText={setSearchQuery}
           style={styles.searchInput}
         />
-        <TouchableOpacity onPress={handleSortOrderChange} style={styles.sortButton}>
+        <TouchableOpacity
+          onPress={handleSortOrderChange}
+          style={styles.sortButton}
+        >
           {sortOrder === "asc" ? (
             <MaterialIcons name="sort-by-alpha" size={24} color="white" />
           ) : (
@@ -88,16 +98,22 @@ export default function Recipes(props) {
       </View>
       <ScrollView>
         {recipes.length > 0 ? (
-          recipes.map((recipe) => (
-            <Recipe
-              key={recipe.id}
-              recipe={recipe}
-              onStatusChange={handleStatusChange}
-              onDelete={props.onDelete}
-              refresh={props.refresh}
-              showToggleSwitch={true}
-            />
-          ))
+          recipes.map((recipe) =>
+            recipe.isHide == false
+              ? (console.log(recipe),
+                (
+                  <Recipe
+                    key={recipe.id}
+                    recipe={recipe}
+                    onStatusChange={handleStatusChange}
+                    onDelete={props.onDelete}
+                    refresh={props.refresh}
+                    showToggleSwitch={true}
+                    isHidden={false}
+                  />
+                ))
+              : null
+          )
         ) : (
           <Text
             style={{
@@ -109,8 +125,58 @@ export default function Recipes(props) {
             You don't have any Recipes
           </Text>
         )}
+        <View>
+        <Button title="Show all hidden recipes" onPress={handleShowAll} />
+        </View>
+
+       
       </ScrollView>
+      <Modal visible={modalVisible} style={{
+              flexDirection: "column",
+              backgroundColor: "white",
+              margin: 0,
+              padding: 20,
+              borderRadius: 7,
+              borderWidth: 2,
+              borderColor: "#870F4F",
+              marginTop: 0,
+            }}>
+         <TouchableOpacity
+                onPress={handleShowAll}
+              >
+                <MaterialIcons
+                  name="keyboard-arrow-left"
+                  size={24}
+                  color="black"
+                />
+              </TouchableOpacity>
+          <ScrollView style={{}}>
+          <View
+            
+          >
+            {modalVisible
+              ? hiddenReciepes.map(
+                  (recipe) => (
+                    console.log(recipe),
+                    (
+                      <Recipe
+                        key={recipe.id}
+                        recipe={recipe}
+                        onStatusChange={handleStatusChange}
+                        onDelete={props.onDelete}
+                        refresh={props.refresh}
+                        showToggleSwitch={true}
+                        isHidden={true}
+                      />
+                    )
+                  )
+                )
+              : null}
+          </View>
+            </ScrollView>
+        
+          <View />
+        </Modal>
     </View>
   );
-
 }

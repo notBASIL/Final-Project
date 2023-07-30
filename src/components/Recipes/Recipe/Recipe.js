@@ -1,10 +1,21 @@
-import { View, Text, Pressable, Modal, Switch, Alert, ScrollView, TextInput, Button, Keyboard } from "react-native";
-import { CheckBox } from 'react-native-elements';
-import { Picker } from '@react-native-picker/picker';
+import {
+  View,
+  Text,
+  Pressable,
+  Modal,
+  Switch,
+  Alert,
+  ScrollView,
+  TextInput,
+  Button,
+  Keyboard,
+} from "react-native";
+import { CheckBox } from "react-native-elements";
+import { Picker } from "@react-native-picker/picker";
 
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import styles from "./styles";
-import formstyles from '../../Form/styles';
+import formstyles from "../../Form/styles";
 import { useState } from "react";
 import deleteRecipe from "../../../database/delete";
 import updateRecipe from "../../../database/update";
@@ -15,20 +26,26 @@ import { MaterialIcons } from "@expo/vector-icons";
 export default function Recipe(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
+
+  const [hide, setHide] = useState(false);
   const [cartItems, setCartItems] = useState([]);
 
   const [recipeName, setRecipeName] = useState(props.recipe.name);
   const [ingredient1, setIngredient1] = useState("");
-  const [quantity1, setQuantity1] = useState(0.0)
-  const [lactoseFree, setLactoseFree] = useState(props.recipe.lactoseFree)
-  const [glutenFree, setGlutenFree] = useState(props.recipe.glutenFree)
+  const [quantity1, setQuantity1] = useState(0.0);
+  const [lactoseFree, setLactoseFree] = useState(props.recipe.lactoseFree);
+  const [glutenFree, setGlutenFree] = useState(props.recipe.glutenFree);
   const [instructions, setInstructions] = useState(props.recipe.instructions);
   const [category, setCategory] = useState(props.recipe.category);
   const [cuisine, setCuisine] = useState(props.recipe.cuisine); // New state variable for cuisines
   const [errorMessage, setErrorMessage] = useState(null);
-  const [preparationTime, setPreparationTime] = useState(props.recipe.preparationTime);
-  const [ingredientsList, setIngredientsList] = useState(props.recipe.ingredients);
-  const [servingSize, setServingSize] = useState(1)
+  const [preparationTime, setPreparationTime] = useState(
+    props.recipe.preparationTime
+  );
+  const [ingredientsList, setIngredientsList] = useState(
+    props.recipe.ingredients
+  );
+  const [servingSize, setServingSize] = useState(1);
 
   const numIngredients = props.recipe.ingredients.length; // Replace this with the actual number of ingredients
   console.log(ingredientsList.length, numIngredients);
@@ -123,10 +140,10 @@ export default function Recipe(props) {
   // Function to handle changes in ingredient and quantity fields
   const handleIngredientChange = (index, type, value) => {
     const updatedIngredientsList = [...ingredientsList];
-    if (type === 'ingredient') {
+    if (type === "ingredient") {
       // Prevent empty ingredients from being added
       updatedIngredientsList[index].ingredient = value.trim();
-    } else if (type === 'quantity') {
+    } else if (type === "quantity") {
       const quantity = parseFloat(value);
       // Prevent quantities less than or equal to 0.0 from being added
       updatedIngredientsList[index].quantity = quantity > 0 ? quantity : 0.0;
@@ -148,21 +165,18 @@ export default function Recipe(props) {
 
   const handleAddToCart = () => {
     const itemsToAdd = ingredientsList.filter(
-      (_, index) => ingredientBgColor[index] === 'white'
+      (_, index) => ingredientBgColor[index] === "white"
     );
     setCartItems(itemsToAdd);
   };
 
-  const handleEditSubission = async () => {
+  const handleEditSubission = async (hide) => {
     // Check if any of the fields are empty or have a quantity of 0.0
     const hasEmptyFields = ingredientsList.some(
-      (item) => item.ingredient.trim() === '' || item.quantity === 0.0
+      (item) => item.ingredient.trim() === "" || item.quantity === 0.0
     );
 
-    if (recipeName &&
-      instructions &&
-      !hasEmptyFields
-    ) {
+    if (recipeName && instructions && !hasEmptyFields) {
       updateRecipe(
         props.recipe.id,
         {
@@ -174,7 +188,8 @@ export default function Recipe(props) {
           instructions: instructions,
           category: category,
           cuisine: cuisine, // Include cuisine in the postData
-          preparationTime: preparationTime
+          preparationTime: preparationTime,
+          isHide: hide,
         },
         props.refresh
       );
@@ -205,10 +220,18 @@ export default function Recipe(props) {
         ],
         { cancelable: false }
       );
-
     }
-  }
+  };
 
+  const onHide = () => {
+    console.log("hide");
+    handleEditSubission(true);
+  };
+
+  const unHide = () => {
+    console.log("unhide");
+    handleEditSubission(false);
+  };
 
   return (
     <>
@@ -308,8 +331,30 @@ export default function Recipe(props) {
           >
             View Ingredients
           </Text>
+          {props.isHidden === "Not required" ? null : (
+            <TouchableOpacity
+              onPress={props.isHidden === true ? unHide : onHide}
+            >
+              <Text>
+                {props.isHidden === true ? (
+                  <MaterialCommunityIcons
+                    name="eye-outline"
+                    size={24}
+                    color="#870F4F"
+                  />
+                ) : (
+                  <MaterialCommunityIcons
+                    name="eye-off-outline"
+                    size={24}
+                    color="#870F4F"
+                  />
+                )}
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </TouchableOpacity>
+
       <Modal visible={modalVisible}>
         <ScrollView style={{}}>
           <View style={styles.modalView}>
@@ -326,19 +371,20 @@ export default function Recipe(props) {
               </TouchableOpacity>
               <Text style={styles.headerTitle}>{props.recipe.name}</Text>
 
-              <TouchableOpacity style={styles.editButton} onPress={onHandleEdit}>
-                <MaterialCommunityIcons
-                  name="file-document-edit-outline"
-                  size={26}
-                  color="black"
-                />
+              <TouchableOpacity
+                style={styles.editButton}
+                onPress={onHandleEdit}
+              >
+                <MaterialCommunityIcons name="pencil" size={20} color="black" />
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={handleDelete} style={styles.deleteIcon}>
+              <TouchableOpacity
+                onPress={handleDelete}
+                style={styles.deleteIcon}
+              >
                 <MaterialIcons name="delete" size={24} color="black" />
               </TouchableOpacity>
             </View>
-
 
             <View style={styles.container2}>
               {/* Stepper component on the left */}
@@ -378,7 +424,11 @@ export default function Recipe(props) {
                   <Text style={styles.ingredientText}>
                     {isMetric
                       ? `${(ingredient.quantity * servingSize).toFixed(2)} g`
-                      : `${(ingredient.quantity * servingSize * 0.03527396).toFixed(2)} oz`}
+                      : `${(
+                          ingredient.quantity *
+                          servingSize *
+                          0.03527396
+                        ).toFixed(2)} oz`}
                   </Text>
                 </View>
               </View>
@@ -426,7 +476,6 @@ export default function Recipe(props) {
               )}
               <Text>{"\n"}</Text>
             </View>
-
           </View>
         </ScrollView>
 
@@ -456,7 +505,6 @@ export default function Recipe(props) {
                   Edit Reciepe
                 </Text>
               </View>
-
 
               <TextInput
                 placeholder="Enter recipe name*"
@@ -526,7 +574,9 @@ export default function Recipe(props) {
 
               <View style={formstyles.parentContainer}>
                 <View style={formstyles.dropdownContainer}>
-                  <Text style={formstyles.dropdownLabel}>Select a Category</Text>
+                  <Text style={formstyles.dropdownLabel}>
+                    Select a Category
+                  </Text>
                   <Picker
                     selectedValue={category}
                     onValueChange={(value) => setCategory(value)}
@@ -582,13 +632,16 @@ export default function Recipe(props) {
               />
               <Button title="Save changes" onPress={handleEditSubission} />
               <Text>{"\n"}</Text>
-
             </View>
           </ScrollView>
         </Modal>
       </Modal>
       {/* Shopping Cart Modal */}
-      <Modal visible={cartItems.length > 0} transparent={true} animationType="slide">
+      <Modal
+        visible={cartItems.length > 0}
+        transparent={true}
+        animationType="slide"
+      >
         <View style={styles.cartModalContainer}>
           <View style={styles.cartModal}>
             <Text style={styles.cartModalTitle}>Shopping Cart</Text>

@@ -89,7 +89,8 @@ export default function Form(props) {
           instructions: instructions,
           category: category,
           cuisine: cuisine, // Include cuisine in the postData
-          preparationTime: preparationTime
+          preparationTime: preparationTime,
+          isHide: false,
         },
         props.refresh
       );
