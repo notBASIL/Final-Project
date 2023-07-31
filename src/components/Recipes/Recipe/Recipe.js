@@ -19,7 +19,6 @@ import formstyles from "../../Form/styles";
 import { useState } from "react";
 import deleteRecipe from "../../../database/delete";
 import updateRecipe from "../../../database/update";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 

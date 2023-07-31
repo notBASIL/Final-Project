@@ -12,7 +12,6 @@ import {
   ScrollView,
 } from "react-native";
 import styles from "./styles";
-import { MaterialCommunityIcons } from "react-native-vector-icons";
 import postData from "../../database/write";
 import { CheckBox } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
