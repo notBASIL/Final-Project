@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
 
+
     deleteIcon: {
         marginLeft: "auto",
     },
@@ -86,6 +87,59 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginHorizontal: 5, // Add some horizontal margin between the switch and text
     },
+
+    cartModalContainer: {
+        flexDirection: 'column',
+        backgroundColor: 'white',
+        margin: 10,
+        padding: 20,
+        borderRadius: 7,
+        borderWidth: 2,
+        borderColor: '#870F4F',
+        marginTop: 200,
+        marginBottom: 200,
+        flex: 1,
+      },
+    
+      cartModal: {
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 10,
+      },
+    
+      cartModalCloseButton: {
+        alignSelf: 'center',
+        backgroundColor: '#870F4F',
+        padding: 10,
+        borderRadius: 5,
+        marginTop: 10,
+      },
+    
+      cartModalCloseButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 16,
+        textAlign: 'center',
+      },
+    
+      cartItem: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#870F4F',
+      },
+    
+      cartModalRecipeName: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: '#870F4F',
+        alignSelf: 'flex-start',
+        marginBottom: 10,
+      },
 
     // buttons styling
     buttons: {

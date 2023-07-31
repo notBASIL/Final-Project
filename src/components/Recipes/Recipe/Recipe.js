@@ -646,7 +646,7 @@ export default function Recipe(props) {
       >
         <View style={styles.cartModalContainer}>
           <View style={styles.cartModal}>
-            <Text style={styles.cartModalTitle}>Shopping Cart</Text>
+            {/* <Text style={styles.cartModalTitle}>Shopping Cart</Text> */}
             <Text style={styles.cartModalRecipeName}>{props.recipe.name}</Text>
             <ScrollView>
               {cartItems.map((item, index) => (
