@@ -17,7 +17,7 @@ Introducing "**CookBook**", the ultimate recipe organizer app that puts the joy 
 > 1. Allowing the user to search for recipes based on ingredients, cuisine, or meal type
 > 2. Allowing the user to save their favorite recipes to their recipe box
 > 3. Allowing the user to add new recipes to the app by entering the recipe name, ingredients, and instructions
-> 4. Allowing the user to edit or delete their own recipes
+> 4. Allowing the user to delete their own recipes
 > 5. Allowing the user to create a grocery list from the ingredients in their saved recipes
 > 6. Set and manage timers for each recipe step within the app
 > 7. Displaying a notification when a new recipe is added to the app's library
@@ -28,9 +28,9 @@ Introducing "**CookBook**", the ultimate recipe organizer app that puts the joy 
 > 12. Allowing the user to sort their saved recipes alphabetically
 > 13. Allowing the user to set reminders to cook certain recipes on specific days
 > 14. Allowing the user to search for recipes by recipe author or contributor
-> 15. Allowing the user to switch between dark and light mode
+> 15. Allowing the user to edit the recipes
 > 16. Filter recipes by dietary preferences or restrictions (Lactose Free, Gluten Free)
 > 17. Categorize recipes into different meal types (breakfast, lunch, dinner, snacks)
 > 18. Allowing the user to filter recipes by preparation time
 > 19. Convert recipe measurements (e.g., from metric to imperial)
-> 20. Generate meal plans for the week
+> 20. Allow user to hide and unhide the recipes
