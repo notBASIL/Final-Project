@@ -12,8 +12,9 @@ import {
 } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { Picker } from "@react-native-picker/picker";
+import { FaTag } from 'react-icons/fa';
 
-import { MaterialCommunityIcons } from "react-native-vector-icons";
+// import { MaterialCommunityIcons } from "react-native-vector-icons";
 import styles from "./styles";
 import formstyles from "../../Form/styles";
 import { useState } from "react";
@@ -21,6 +22,7 @@ import deleteRecipe from "../../../database/delete";
 import updateRecipe from "../../../database/update";
 import { TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 export default function Recipe(props) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -249,8 +251,40 @@ export default function Recipe(props) {
               {props.recipe.name}
             </Text>
 
+            <View style={styles.iconset}>
+            {props.isHidden === "Not required" ? null : (
+            <TouchableOpacity
+              onPress={props.isHidden === true ? unHide : onHide}
+            >
+              <Text>
+                {props.isHidden === true ? (
+                  <MaterialIcons
+                    name="unarchive"
+                    size={24}
+                    color="#870F4F"
+                  />
+                ) : (
+                  <MaterialIcons
+                    name="archive"
+                    size={24}
+                    color="#870F4F"
+                  />
+                )}
+              </Text>
+            </TouchableOpacity>
+          )}
+
+            <TouchableOpacity onPress={handleAddToCart}>
+            <MaterialCommunityIcons
+              name="cart-plus"
+              size={24}
+              color="#870F4F"
+              style={styles.addShoppingCartIcon}
+            />
+          </TouchableOpacity>
+
             {props.showToggleSwitch && (
-              <TouchableOpacity onPress={handleHeartPress}>
+              <TouchableOpacity style={styles.hearticon} onPress={handleHeartPress}>
                 {favourite ? (
                   <MaterialCommunityIcons
                     name="heart"
@@ -266,29 +300,44 @@ export default function Recipe(props) {
                 )}
               </TouchableOpacity>
             )}
+            </View>
           </View>
+
+          <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#dadada',
+        paddingVertical: 1,
+        paddingHorizontal: 12,
+        borderRadius: 50,
+        // borderWidth: 2,
+        borderColor: '#c0c0c0',
+      }}>
+          <MaterialCommunityIcons name="tag" size={18} color="#870F4F" style={{ 
+            marginRight: 6,
+            paddingRight: 5,
+           }} />
+      <Text
+        style={{
+          fontSize: 15,
+          fontWeight: 'bold',
+          color: 'black',
+          paddingLeft: 2,
+        }}
+      >
+            {props.recipe?.category},
+          </Text>
           <Text
             style={{
-              padding: 10,
+              padding: 5,
               fontSize: 15,
               fontWeight: "bold",
               marginTop: 1,
               color: "black",
             }}
-          >
-            {props.recipe?.category}
+          >{props.recipe?.cuisine}
           </Text>
-          <Text
-            style={{
-              padding: 10,
-              fontSize: 15,
-              fontWeight: "bold",
-              marginTop: 1,
-              color: "black",
-            }}
-          >
-            {props.recipe?.cuisine}
-          </Text>
+          </View>
           <Text
             style={{
               padding: 10,
@@ -300,15 +349,6 @@ export default function Recipe(props) {
           >
             Preparation time: {props.recipe?.preparationTime}
           </Text>
-
-          <TouchableOpacity onPress={handleAddToCart}>
-            <MaterialCommunityIcons
-              name="cart-plus"
-              size={24}
-              color="#870F4F"
-              style={styles.addShoppingCartIcon}
-            />
-          </TouchableOpacity>
 
           {props.recipe.glutenFree && props.recipe.lactoseFree && (
             <Text style={styles.label}>Gluten and Lactose Free</Text>
@@ -332,27 +372,6 @@ export default function Recipe(props) {
           >
             View Ingredients
           </Text>
-          {props.isHidden === "Not required" ? null : (
-            <TouchableOpacity
-              onPress={props.isHidden === true ? unHide : onHide}
-            >
-              <Text>
-                {props.isHidden === true ? (
-                  <MaterialCommunityIcons
-                    name="eye-outline"
-                    size={24}
-                    color="#870F4F"
-                  />
-                ) : (
-                  <MaterialCommunityIcons
-                    name="eye-off-outline"
-                    size={24}
-                    color="#870F4F"
-                  />
-                )}
-              </Text>
-            </TouchableOpacity>
-          )}
         </View>
       </TouchableOpacity>
 
@@ -372,11 +391,12 @@ export default function Recipe(props) {
               </TouchableOpacity>
               <Text style={styles.headerTitle}>{props.recipe.name}</Text>
 
+              <View style={styles.iconset}>
               <TouchableOpacity
                 style={styles.editButton}
                 onPress={onHandleEdit}
               >
-                <MaterialCommunityIcons name="pencil" size={20} color="black" />
+                <MaterialCommunityIcons name="pencil" size={24} color="black" />
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -385,6 +405,9 @@ export default function Recipe(props) {
               >
                 <MaterialIcons name="delete" size={24} color="black" />
               </TouchableOpacity>
+              </View>
+
+
             </View>
 
             <View style={styles.container2}>

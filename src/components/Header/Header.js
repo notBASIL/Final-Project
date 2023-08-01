@@ -25,9 +25,9 @@ export default function Header() {
         </Text>
       </View>
 
-      <TouchableWithoutFeedback onPress={openModal}>
+      {/* <TouchableWithoutFeedback onPress={openModal}>
         <MaterialCommunityIcons style={styles.text2} name="cart" size={35} color="white" />
-      </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback> */}
 
       <Modal visible={isModalVisible} animationType="slide" transparent={false}>
         <View style={styles.modalContainer}>

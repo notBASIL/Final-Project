@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        paddingBottom: 10,
     },
 
     heartContainer: {
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
 
 
     deleteIcon: {
-        marginLeft: "auto",
+        paddingLeft: 5,
     },
 
     backIcon: {
@@ -139,6 +140,20 @@ const styles = StyleSheet.create({
         color: '#870F4F',
         alignSelf: 'flex-start',
         marginBottom: 10,
+      },
+
+      iconset: {
+        flexDirection: 'row',
+
+      },
+
+      addShoppingCartIcon: {
+        paddingLeft: 10,
+        paddingRight: 10,
+      },
+
+      typetag: {
+        flexDirection: 'row',
       },
 
     // buttons styling
