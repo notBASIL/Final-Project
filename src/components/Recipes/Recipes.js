@@ -126,7 +126,7 @@ export default function Recipes(props) {
           </Text>
         )}
         <View>
-          <Button title="Show all hidden recipes" onPress={handleShowAll} />
+          <Button title="Show Archived recipes" onPress={handleShowAll} />
         </View>
 
 
@@ -157,7 +157,7 @@ export default function Recipes(props) {
             {modalVisible ? (
               hiddenReciepes.length === 0 ? (
 
-                <Text style={styles.centeredText}>You Don't have any hidden recipes</Text>
+                <Text style={styles.centeredText}>You Don't have any Archived recipes</Text>
 
               ) : (
                 hiddenReciepes.map((recipe) => (

@@ -88,7 +88,7 @@ export default function App() {
             {() => <Form onAddRecipe={addRecipe} refresh={refresh} />}
           </Tab.Screen>
 
-          <Tab.Screen name="Filter" options={{
+          <Tab.Screen name="Filters" options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="filter" color={color} size={size} />
             ),

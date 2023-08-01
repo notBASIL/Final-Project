@@ -21,7 +21,7 @@ export default function Header() {
 
         <Text style={styles.text}>
           CookBook{"\n"}
-          <Text style={{ fontSize: 13, color: 'white', fontWeight: 'bold' }}>Complete Recipe App</Text>
+          <Text style={{ fontSize: 13, color: 'white', fontWeight: 'bold' }}>The Complete Recipe App</Text>
         </Text>
       </View>
 
