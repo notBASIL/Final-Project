@@ -132,7 +132,7 @@ export default function Form(props) {
     const updatedIngredientsList = [...ingredientsList];
     if (type === 'ingredient') {
       // Prevent empty ingredients from being added
-      updatedIngredientsList[index].ingredient = value.trim();
+      updatedIngredientsList[index].ingredient = value
     } else if (type === 'quantity') {
       const quantity = parseFloat(value);
       // Prevent quantities less than or equal to 0.0 from being added
